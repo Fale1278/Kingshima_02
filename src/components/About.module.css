@@ -1,0 +1,514 @@
+/* ── About Section ───────────────────────────────────────────────────── */
+
+.about {
+  padding: 6.5rem 1.5rem 7.5rem;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+.bgGlow {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4.5rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Text Column ──────────────────────────────────────────────────────── */
+
+.textCol {
+  position: relative;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.kickerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.kickerTag {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.kickerCode {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: var(--surface-inner);
+  border: 1px solid var(--border);
+  color: var(--accent-primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.05em;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.heading em {
+  color: var(--accent-primary);
+  font-style: italic;
+}
+
+.leadParagraph {
+  font-size: 1.12rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.leadParagraph strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Interactive Story Tabs ──────────────────────────────────────────── */
+
+.tabContainer {
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.tabHeader {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tabBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tabBtn:hover {
+  color: var(--text-primary);
+  background: var(--surface-inner);
+}
+
+.tabBtnActive {
+  color: var(--text-primary);
+  background: var(--surface-alt);
+  border-color: var(--border);
+  font-weight: 600;
+}
+
+.tabPip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.tabBtnActive .tabPip {
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.tabPanel {
+  padding: 0.25rem 0;
+}
+
+.tabTitle {
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.tabBody {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.tabHighlightRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: var(--surface-inner);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-xs);
+}
+
+.highlightBadge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.highlightText {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ── Ethos Pillars Grid ──────────────────────────────────────────────── */
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.pillarCard {
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.pillarCard:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+}
+
+.pillarTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.pillarIcon {
+  font-size: 0.95rem;
+  color: var(--accent-primary);
+}
+
+.pillarBadge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.pillarLabel {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.pillarText {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* ── Sidebar Column ──────────────────────────────────────────────────── */
+
+.sidebarCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 96px;
+}
+
+.statsTilt {
+  width: 100%;
+}
+
+.statsCard {
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.statsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+
+.statsHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.livePulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 10px var(--accent-emerald);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.statsHeaderTitle {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+.statsRegistry {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCell {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: var(--surface-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
+
+.statCell:hover {
+  border-color: var(--border-focus);
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.statLabel {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.statNote {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.statsFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.footerSeal {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.viewProgramsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-primary-light);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.viewProgramsLink:hover {
+  color: var(--accent-primary);
+  transform: translateX(2px);
+}
+
+/* ── Founder Card ────────────────────────────────────────────────────── */
+
+.founderCard {
+  background: linear-gradient(135deg, var(--surface-card) 0%, rgba(37, 99, 235, 0.05) 100%);
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.founderQuoteGlyph {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent-primary);
+  opacity: 0.3;
+  margin-bottom: -0.5rem;
+}
+
+.founderQuote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--text-primary);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.founderMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.founderAvatarBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid var(--accent-gold);
+}
+
+.founderAvatarInitial {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.founderName {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.founderRole {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--accent-primary-light);
+  font-weight: 500;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+@media (max-width: 1080px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .sidebarCol {
+    position: static;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 4.5rem 1.25rem 5.5rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

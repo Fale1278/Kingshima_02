@@ -1,0 +1,68 @@
+{
+  "students": [
+    {
+      "id": "stud_1789934024898_5cutar",
+      "username": "kingnanmuafale@gmail.com",
+      "email": "kingnanmuafale@gmail.com",
+      "login_code": "6UPCJQYP",
+      "password_hash": null,
+      "progress": [],
+      "xp": 100,
+      "streak_days": 1,
+      "last_active": "2026-09-20T19:53:44.898Z",
+      "application_paid": false,
+      "application_fee_ref": null,
+      "created_at": "2026-09-20T19:53:44.898Z",
+      "updated_at": "2026-09-20T19:53:44.898Z"
+    },
+    {
+      "id": "stud_1790761356264_b4jbx6",
+      "username": "kingnanmuaale@gmail.com",
+      "email": "kingnanmuaale@gmail.com",
+      "login_code": "B2HYANS8",
+      "password_hash": null,
+      "progress": [],
+      "xp": 100,
+      "streak_days": 1,
+      "last_active": "2026-09-30T09:42:36.265Z",
+      "application_paid": false,
+      "application_fee_ref": null,
+      "created_at": "2026-09-30T09:42:36.265Z",
+      "updated_at": "2026-09-30T09:42:36.265Z"
+    },
+    {
+      "id": "stud_1790770919126_4e3ph0",
+      "username": "kinnanmuafale@gmail.com",
+      "email": "kinnanmuafale@gmail.com",
+      "login_code": "76AAPN3B",
+      "password_hash": null,
+      "progress": [],
+      "xp": 100,
+      "streak_days": 1,
+      "last_active": "2026-09-30T12:21:59.126Z",
+      "application_paid": false,
+      "application_fee_ref": null,
+      "created_at": "2026-09-30T12:21:59.127Z",
+      "updated_at": "2026-09-30T12:21:59.127Z"
+    },
+    {
+      "id": "stud_1791455258279_a34cdx",
+      "username": "kingnamuafale@gmail.com",
+      "email": "kingnamuafale@gmail.com",
+      "login_code": "3QKSQDT3",
+      "password_hash": null,
+      "progress": [],
+      "xp": 100,
+      "streak_days": 1,
+      "last_active": "2026-10-08T10:27:38.279Z",
+      "application_paid": false,
+      "application_fee_ref": null,
+      "created_at": "2026-10-08T10:27:38.280Z",
+      "updated_at": "2026-10-08T10:27:38.280Z"
+    }
+  ],
+  "submissions": [],
+  "lessons": [],
+  "profiles": [],
+  "certificates": []
+}

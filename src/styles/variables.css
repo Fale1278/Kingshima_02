@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap');
+
+:root {
+  /* ── Kingshima Design System (Dark Mode Default) ─────────────────────── */
+  --bg-primary: #08090e;
+  --bg-secondary: #0d0f18;
+  --surface: #13151f;
+  --surface-alt: #191c2a;
+  --surface-hover: #1e2132;
+  
+  /* Theme-aware card surfaces */
+  --surface-card: rgba(19, 21, 31, 0.75);
+  --surface-card-hover: rgba(25, 28, 42, 0.95);
+  --surface-elevated: rgba(13, 15, 24, 0.92);
+  --surface-inner: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: rgba(59, 130, 246, 0.45);
+  --card-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+
+  --code-bg: rgba(8, 9, 14, 0.75);
+  --code-color: #e2e8f0;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-focus: rgba(37, 99, 235, 0.5);
+
+  --text-primary: #f0f0f5;
+  --text-secondary: #8a8fa8;
+  --text-muted: #565b70;
+  --text-dim: #3a3e52;
+
+  /* ── Navy Blue Primary Accent (Tech Cobalt / Royal Navy) ─────────── */
+  --accent-primary: #2563eb;
+  --accent-primary-rgb: 37, 99, 235;
+  --accent-primary-light: #60a5fa;
+  --accent-navy-deep: #1e3a8a;
+
+  /* Cool complement */
+  --accent-secondary: #38bdf8;
+  --accent-secondary-rgb: 56, 189, 248;
+
+  /* Supporting palette */
+  --accent-gold: #d4a96a;
+  --accent-emerald: #3ecf8e;
+  --accent-violet: #9b6dff;
+
+  --accent-glow: rgba(37, 99, 235, 0.12);
+  --accent-glow-strong: rgba(37, 99, 235, 0.25);
+
+  /* Glass system */
+  --glass-blur: 24px;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(8, 9, 14, 0.75);
+  --glass-bg-light: rgba(19, 21, 31, 0.88);
+
+  /* Typography */
+  --font-heading: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-body: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --transition-fast: all 0.15s var(--ease-out-expo);
+  --transition-smooth: all 0.25s var(--ease-out-expo);
+  --transition-slow: all 0.45s var(--ease-out-expo);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+
+  /* Border radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows & Depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-3d: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(37, 99, 235, 0.15);
+  --shadow-accent: 0 4px 24px rgba(37, 99, 235, 0.22);
+
+  /* 3D & Tech Elements */
+  --perspective-default: 1200px;
+  --specular-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 60%, transparent 100%);
+  --tech-glow-primary: 0 0 20px rgba(37, 99, 235, 0.35);
+  --tech-glow-cyan: 0 0 20px rgba(56, 189, 248, 0.3);
+  --tech-glow-emerald: 0 0 20px rgba(62, 207, 142, 0.3);
+}
+
+[data-theme='light'] {
+  /* ── Kingshima Light Mode (Crisp Slate/White & Deep Navy) ────────── */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --surface-hover: #e2e8f0;
+
+  /* Light mode card surfaces */
+  --surface-card: rgba(255, 255, 255, 0.92);
+  --surface-card-hover: #ffffff;
+  --surface-elevated: rgba(255, 255, 255, 0.98);
+  --surface-inner: rgba(15, 23, 42, 0.035);
+  --card-border: rgba(15, 23, 42, 0.09);
+  --card-border-hover: rgba(30, 64, 175, 0.4);
+  --card-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.09), 0 0 16px rgba(30, 64, 175, 0.06);
+
+  --code-bg: rgba(241, 245, 249, 0.96);
+  --code-color: #0f172a;
+
+  --border: rgba(15, 23, 42, 0.1);
+  --border-subtle: rgba(15, 23, 42, 0.05);
+  --border-focus: rgba(30, 64, 175, 0.45);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+
+  /* Deep Authoritative Navy Blue */
+  --accent-primary: #1e40af;
+  --accent-primary-rgb: 30, 64, 175;
+  --accent-primary-light: #2563eb;
+  --accent-navy-deep: #0f172a;
+
+  --accent-secondary: #0284c7;
+  --accent-secondary-rgb: 2, 132, 199;
+
+  --accent-glow: rgba(30, 64, 175, 0.08);
+  --accent-glow-strong: rgba(30, 64, 175, 0.18);
+
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg-light: rgba(248, 250, 252, 0.96);
+  --glass-border: rgba(15, 23, 42, 0.08);
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 8px 32px rgba(15, 23, 42, 0.1);
+  --shadow-3d: 0 20px 50px -10px rgba(15, 23, 42, 0.12), 0 0 25px rgba(30, 64, 175, 0.08);
+  --shadow-accent: 0 4px 24px rgba(30, 64, 175, 0.15);
+
+  --specular-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 60%, transparent 100%);
+  --tech-glow-primary: 0 0 20px rgba(30, 64, 175, 0.2);
+}

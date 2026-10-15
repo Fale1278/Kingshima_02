@@ -1,0 +1,418 @@
+/* ── Certificate Generator / Diploma Styles ─────────────────────────── */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.88);
+  backdrop-filter: blur(16px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.certWrapper {
+  width: 820px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Controls Bar ────────────────────────────────────────────────────── */
+
+.controlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+}
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.telemetryTag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.certIdDisplay {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--surface-inner);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0.45rem 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.printBtn:hover {
+  background: var(--accent-primary-light);
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: var(--transition-fast);
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+/* ── Physical Luxury Certificate Card ────────────────────────────────── */
+
+.certCard {
+  width: 100%;
+  background: radial-gradient(circle at 50% 30%, #101424 0%, #090b12 100%);
+  border: 2px solid rgba(212, 169, 106, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  color: #ffffff;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 169, 106, 0.15);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.innerBorder {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(212, 169, 106, 0.2);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  color: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: 0.2em;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.certHeader {
+  margin-bottom: 1.25rem;
+}
+
+.crestBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(212, 169, 106, 0.12);
+  border: 1.5px solid var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.6rem auto;
+}
+
+.crestIcon {
+  font-size: 1.25rem;
+  color: var(--accent-gold);
+}
+
+.foundationName {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+
+.foundationMotto {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.dividerLine {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+  margin: 1.25rem auto;
+}
+
+/* ── Title Section ───────────────────────────────────────────────────── */
+
+.titleSection {
+  margin-bottom: 1.25rem;
+}
+
+.certCategory {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.certTitle {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 2.3rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.certPreamble {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.85rem;
+}
+
+/* ── Student Block ───────────────────────────────────────────────────── */
+
+.studentBlock {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.studentName {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.studentUnderline {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+}
+
+.certBodyText {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  max-width: 580px;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.courseBadge {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  padding: 0.55rem 1.8rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 2.5rem;
+}
+
+.courseTitleText {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+
+.certFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.75rem;
+  text-align: left;
+}
+
+.signatureBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.signatureLine {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.35rem;
+  width: 180px;
+}
+
+.scriptSignature {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--accent-gold);
+}
+
+.signatureName {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.signatureRole {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* ── Gold Seal ───────────────────────────────────────────────────────── */
+
+.goldSeal {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d4a96a 0%, #9a7238 100%);
+  border: 2px dashed #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(212, 169, 106, 0.4);
+  transform: rotate(-5deg);
+}
+
+.sealInner {
+  text-align: center;
+  color: #101424;
+}
+
+.sealStar {
+  font-size: 0.85rem;
+  display: block;
+}
+
+.sealText {
+  font-family: var(--font-mono);
+  font-size: 0.45rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.sealYear {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 800;
+}
+
+/* ── Meta Block ──────────────────────────────────────────────────────── */
+
+.metaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: right;
+}
+
+.metaItem {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.metaValue {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ── Print Media ─────────────────────────────────────────────────────── */
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .modalOverlay {
+    position: static;
+    background: transparent;
+    padding: 0;
+  }
+
+  .controlsBar {
+    display: none !important;
+  }
+
+  .certCard {
+    box-shadow: none;
+    border: 2px solid #000000;
+    color: #000000 !important;
+    background: #ffffff !important;
+  }
+
+  .studentName,
+  .crestIcon,
+  .scriptSignature,
+  .foundationMotto {
+    color: #000000 !important;
+  }
+
+  .certTitle,
+  .foundationName,
+  .courseTitleText {
+    color: #000000 !important;
+  }
+}

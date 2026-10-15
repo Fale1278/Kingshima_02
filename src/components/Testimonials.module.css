@@ -1,0 +1,353 @@
+/* ── Testimonials / Voices of the Movement ───────────────────────────── */
+
+.section {
+  padding: 6.5rem 1.5rem 7.5rem;
+  position: relative;
+  background: transparent;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+
+.header {
+  margin-bottom: 3.5rem;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.kickerText {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.kickerCode {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: var(--surface-inner);
+  border: 1px solid var(--border);
+  color: var(--accent-primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.8vw, 4rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.heading em {
+  color: var(--accent-primary);
+  font-style: italic;
+}
+
+.subheading {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 680px;
+  font-weight: 300;
+}
+
+/* ── Stage Grid ──────────────────────────────────────────────────────── */
+
+.stageGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.quoteTilt {
+  width: 100%;
+}
+
+.quoteCard {
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(14px);
+  position: relative;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.trackInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.trackName {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.cohortTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: var(--surface-inner);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-xs);
+}
+
+.verifiedBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.badgePip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold);
+}
+
+.quoteHeadline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.55rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.quoteBody {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+  font-weight: 300;
+}
+
+.deliverableRow {
+  background: var(--surface-inner);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-emerald);
+  border-radius: var(--radius-xs);
+  padding: 0.75rem 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.deliverableLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-emerald);
+}
+
+.deliverableText {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.authorName {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.authorRole {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.authorOrg {
+  color: var(--accent-primary-light);
+  font-weight: 500;
+}
+
+/* ── Selector Deck ───────────────────────────────────────────────────── */
+
+.selectorDeck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: sticky;
+  top: 96px;
+}
+
+.deckLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.selectorCard {
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: left;
+}
+
+.selectorCard:hover {
+  border-color: var(--card-border-hover);
+  background: var(--surface-card-hover);
+  transform: translateX(3px);
+}
+
+.selectorActive {
+  border-color: var(--student-accent);
+  background: var(--surface-elevated);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(37, 99, 235, 0.15);
+}
+
+.selectorLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.selectorAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  transition: var(--transition-fast);
+}
+
+.selectorMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectorName {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.selectorTrack {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.selectorArrow {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.selectorActive .selectorArrow {
+  color: var(--student-accent);
+  transform: translateX(2px);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .stageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .selectorDeck {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 4.5rem 1.25rem 5.5rem;
+  }
+
+  .quoteCard {
+    padding: 1.5rem;
+  }
+
+  .quoteHeadline {
+    font-size: 1.25rem;
+  }
+}

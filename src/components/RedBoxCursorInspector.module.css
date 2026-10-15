@@ -1,0 +1,245 @@
+/* Red Box Cursor Inspector - Crafted Human Interface Styling */
+
+.inspectorWrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  font-family: var(--font-body);
+}
+
+/* Precise Target Frame */
+.redBox {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid #f43f5e;
+  background: rgba(244, 63, 94, 0.08);
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.35);
+  transform: translate(-50%, -50%);
+  transition: width 0.15s cubic-bezier(0.16, 1, 0.3, 1), height 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.redBoxActive {
+  width: 40px;
+  height: 40px;
+  border-color: #fb7185;
+  background: rgba(244, 63, 94, 0.15);
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
+}
+
+.redBoxDot {
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #f43f5e;
+}
+
+.cornerTL, .cornerTR, .cornerBL, .cornerBR {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-color: #f43f5e;
+  border-style: solid;
+}
+.cornerTL { top: -2px; left: -2px; border-width: 1.5px 0 0 1.5px; }
+.cornerTR { top: -2px; right: -2px; border-width: 1.5px 1.5px 0 0; }
+.cornerBL { bottom: -2px; left: -2px; border-width: 0 0 1.5px 1.5px; }
+.cornerBR { bottom: -2px; right: -2px; border-width: 0 1.5px 1.5px 0; }
+
+/* Refined Tooltip Card */
+.tooltipCard {
+  position: fixed;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: rgba(11, 13, 20, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.9rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  pointer-events: auto;
+  animation: fadeInTooltip 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInTooltip {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.35rem;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.phonetic {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.wordTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.01em;
+}
+
+.originBox {
+  background: rgba(244, 63, 94, 0.06);
+  border-left: 2px solid #f43f5e;
+  padding: 0.35rem 0.55rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.originLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #fda4af;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+.originText {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.definitionText {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+/* Directional Arrow Overlay */
+.arrowContainer {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+}
+
+.svgArrow {
+  filter: drop-shadow(0 0 4px rgba(244, 63, 94, 0.6));
+}
+
+.codeSuggestionBox {
+  margin-top: 0.5rem;
+  background: #06070a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #34d399;
+  margin-bottom: 0.35rem;
+}
+
+.codeBlock {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #a7f3d0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin: 0 0 0.35rem 0;
+  max-height: 130px;
+}
+
+.codeExplanation {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Floating Status Bar */
+.quickBar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 13, 20, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100000;
+  pointer-events: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #e2e8f0;
+}
+
+.toggleBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleBtn:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: #f43f5e;
+}
+
+@media (max-width: 768px) {
+  .redBox, .tooltipCard, .arrowContainer, .quickBar {
+    display: none !important;
+  }
+}

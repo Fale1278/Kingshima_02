@@ -1,0 +1,273 @@
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+/* ── CTA Banner ───────────────────────────────────────────────────────── */
+
+.ctaBanner {
+  padding: 5.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 60%);
+  position: relative;
+}
+
+.ctaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.ctaHeading {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.ctaHeading em {
+  color: var(--accent-primary);
+  font-style: italic;
+}
+
+.ctaSub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.ctaActions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.85rem;
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+  box-shadow: var(--shadow-accent);
+}
+
+.ctaPrimary:hover {
+  background: var(--accent-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow-strong);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.85rem;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.ctaSecondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-focus);
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────── */
+
+.body {
+  padding: 4.5rem 1.5rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.bodyInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 5rem;
+}
+
+/* ── Brand Column ─────────────────────────────────────────────────────── */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  text-decoration: none;
+}
+
+.logoMark {
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+}
+
+.logoName {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.socials {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.social {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.social:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+  border-color: var(--accent-primary);
+}
+
+/* ── Link Columns ─────────────────────────────────────────────────────── */
+
+.linkCols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.colLabel {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.colList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+}
+
+.colLink {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.colLink:hover {
+  color: var(--accent-primary-light);
+}
+
+/* ── Bottom Bar ───────────────────────────────────────────────────────── */
+
+.bottom {
+  padding: 1.5rem 1.5rem;
+  background: var(--bg-primary);
+}
+
+.bottomInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.copyright {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.madeWith {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  .bodyInner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .ctaInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .linkCols {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ctaBanner {
+    padding: 4rem 1.25rem;
+  }
+
+  .body {
+    padding: 3rem 1.25rem;
+  }
+
+  .bottomInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
