@@ -70,24 +70,22 @@ export const CourseCard = React.memo(({ course, onSelect }) => {
     explanation: 'Centralizing colors into CSS custom properties makes themes, hover interactions, and dark modes effortlessly maintainable.',
   },
   {
-    id: 'supabase-rls',
-    keywords: ['supabase', 'sql', 'database', 'auth', 'postgres', 'rls'],
-    title: 'Row Level Security (RLS) Policy Pattern',
+    id: 'database-security',
+    keywords: ['sql', 'database', 'auth', 'postgres', 'sqlite', 'security'],
+    title: 'SQL Database Security & Access Control Pattern',
     category: 'Backend & Security',
-    problem: 'Exposing backend tables without RLS lets unauthenticated users read or tamper with private rows.',
-    improvedCode: `-- Improved Supabase SQL Policy Structure
-ALTER TABLE public.student_enrollments ENABLE ROW LEVEL SECURITY;
+    problem: 'Exposing backend tables without query parameterization and authorization guards lets unauthenticated users read or tamper with private rows.',
+    improvedCode: `-- Secure In-House Database Schema with Constraints
+CREATE TABLE student_enrollments (
+  id TEXT PRIMARY KEY,
+  student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+  course_id TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
 
-CREATE POLICY "Students can view their own enrollments"
-ON public.student_enrollments
-FOR SELECT
-USING (auth.uid() = student_id);
-
-CREATE POLICY "Admins full access to enrollments"
-ON public.student_enrollments
-FOR ALL
-USING (auth.jwt() ->> 'role' = 'admin');`,
-    explanation: 'Row Level Security guarantees access control at the database engine level, regardless of frontend code.',
+-- Parameterized backend query guard:
+-- SELECT * FROM student_enrollments WHERE student_id = ? AND course_id = ?;`,
+    explanation: 'Parameterized queries and foreign key constraints guarantee data integrity and eliminate SQL injection vulnerabilities at the engine level.',
   },
 ];
 

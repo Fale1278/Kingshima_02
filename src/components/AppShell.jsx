@@ -11,10 +11,11 @@ import AiAgentWidget from '@/components/AiAgentWidget';
 export default function AppShell({ children }) {
   const pathname = usePathname();
 
-  // Hide global chrome on private bootcamp pages
+  // Hide global chrome on private bootcamp pages and dedicated studio
   const hideShell =
     pathname?.startsWith('/bootcamp/dashboard') ||
-    pathname?.startsWith('/bootcamp/admin');
+    pathname?.startsWith('/bootcamp/admin') ||
+    pathname?.startsWith('/studio');
 
   return (
     <ThemeProvider>

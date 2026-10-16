@@ -61,6 +61,14 @@ export function BootcampAuthProvider({ children }) {
 
 export function useBootcampAuth() {
   const ctx = useContext(BootcampAuthContext);
-  if (!ctx) throw new Error('useBootcampAuth must be used within BootcampAuthProvider');
+  if (!ctx) {
+    return {
+      student: null,
+      loading: false,
+      login: () => {},
+      logout: () => {},
+      markComplete: async () => {},
+    };
+  }
   return ctx;
 }

@@ -64,6 +64,15 @@ export const DICTIONARY = {
     courseId: 'python-ai',
     relatedTerms: ['Machine Learning', 'Data Science', 'Automation'],
   },
+  sqlite: {
+    word: 'SQLite',
+    phonetic: '/ˌɛs.kjuːˈɛl.aɪt/',
+    category: 'Database Engine',
+    origin: 'From Structured Query Language (SQL) + "-ite" (mineral suffix denoting compactness). Invented by D. Richard Hipp in 2000.',
+    definition: 'A self-contained, high-reliability, zero-configuration, full-featured transactional SQL database engine used worldwide.',
+    courseId: 'web-dev',
+    relatedTerms: ['PostgreSQL', 'ACID', 'Transactions', 'SQL'],
+  },
   supabase: {
     word: 'Supabase',
     phonetic: '/ˈsuːpəbeɪs/',

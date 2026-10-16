@@ -4,8 +4,8 @@ import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Lock, Download } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 import { downloadText } from '@/lib/zip';
+import { backendClient } from '@/lib/backendClient';
 import { useBootcampAuth } from '@/context/BootcampAuthContext';
 import { useToast } from '@/context/ToastContext';
 import { COURSES, isLessonUnlocked } from '@/data/coursesData';
@@ -75,16 +75,16 @@ export default function LessonPage({ params }) {
     }
   };
 
-  // Optionally fetch richer lesson data (video_url, resources) from Supabase
+  // Optionally fetch richer lesson data (video_url, resources) from native SQLite backend
   useEffect(() => {
     if (!lesson) return;
     async function fetchLesson() {
-      const { data } = await supabase
-        .from('lessons')
-        .select('*')
-        .eq('id', lesson.id)
-        .maybeSingle();
-      if (data) setDbLesson(data);
+      try {
+        const data = await backendClient.getLesson(lesson.id);
+        if (data) setDbLesson(data);
+      } catch (err) {
+        console.error('Failed to load lesson from backend:', err);
+      }
     }
     fetchLesson();
   }, [lesson]);
@@ -168,7 +168,15 @@ export default function LessonPage({ params }) {
     setSubmitting(true);
     setSubmitStatus(null);
     try {
-      let uploadedPath = file ? file.name : null;
+      let uploadedPath = null;
+      if (file) {
+        try {
+          const uploadRes = await backendClient.uploadFile(file);
+          uploadedPath = uploadRes.url;
+        } catch {
+          uploadedPath = file.name;
+        }
+      }
 
       const aiReview = gradeAssignmentSubmission(submissionText || docLink || 'Submitted assignment', lesson.courseId, lesson.id);
       setAiGradeResult(aiReview);

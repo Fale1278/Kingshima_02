@@ -10,6 +10,7 @@ const navLinks = [
   { name: 'About', path: '/about' },
   { name: 'Programs', path: '/programs' },
   { name: 'Bootcamp', path: '/bootcamp' },
+  { name: 'AI Studio', path: '/studio' },
   { name: 'Community', path: '/community' },
   { name: 'Blog', path: '/blog' },
 ];

@@ -36,7 +36,7 @@ const pillars = [
     deliverable: 'Live Production SaaS Deployment',
     highlights: [
       { label: 'Learning Model', value: 'Hands-on Production Sprints' },
-      { label: 'Core Stack', value: 'Next.js, Python, Supabase' },
+      { label: 'Core Stack', value: 'Next.js, Python, SQLite/Postgres' },
       { label: 'Evaluation', value: 'Working Live Capstone' },
     ],
   },

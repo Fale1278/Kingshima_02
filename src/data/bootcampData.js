@@ -1,4 +1,4 @@
-// Static course data — swap lesson video_url / resources from Supabase in production
+// Static course data — dynamic lesson video_url / resources fetched from SQLite backend in production
 
 export const COURSE_WEEKS = [
   {

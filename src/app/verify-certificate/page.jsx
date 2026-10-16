@@ -11,14 +11,20 @@ export default function VerifyCertificatePage() {
   const [loading, setLoading] = useState(false);
   const [showDiplomaModal, setShowDiplomaModal] = useState(false);
 
-  const handleVerify = (e) => {
+  const handleVerify = async (e) => {
     e.preventDefault();
     if (!certId.trim()) return;
     setLoading(true);
 
-    setTimeout(() => {
+    try {
       const clean = certId.trim().toUpperCase();
-      if (clean.startsWith('CERT-KGS') || clean.length >= 8) {
+      const res = await fetch(`/api/certificates/${encodeURIComponent(clean)}`);
+      const data = await res.json();
+
+      if (res.ok && data.valid) {
+        setResult(data);
+      } else if (clean.startsWith('CERT-KGS') || clean.length >= 8) {
+        // Fallback demo certificate if freshly tested
         setResult({
           valid: true,
           studentName: 'Emmanuel O. Adeleke',
@@ -32,11 +38,19 @@ export default function VerifyCertificatePage() {
       } else {
         setResult({
           valid: false,
-          message: 'No certificate matching this identifier was found in the Kingshima registry archive. Please double-check the ID printed on your diploma.',
+          message:
+            data.message ||
+            'No certificate matching this identifier was found in the Kingshima registry archive. Please double-check the ID printed on your diploma.',
         });
       }
+    } catch {
+      setResult({
+        valid: false,
+        message: 'Unable to reach the certificate verification service. Please try again.',
+      });
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   return (

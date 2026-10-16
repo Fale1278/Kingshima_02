@@ -14,18 +14,18 @@ const tracks = [
     category: 'Engineering & Architecture',
     tagline: 'From foundational TypeScript to production-grade distributed architectures.',
     description:
-      'Master modern full-stack web applications, REST & GraphQL APIs, Supabase/Postgres real-time engines, and Next.js 16 server-driven architectures built for high scalability.',
+      'Master modern full-stack web applications, REST & GraphQL APIs, SQLite/PostgreSQL real-time data engines, and Next.js 16 server-driven architectures built for high scalability.',
     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80',
-    tags: ['Next.js 16', 'TypeScript', 'PostgreSQL', 'Docker', 'AWS'],
+    tags: ['Next.js 16', 'TypeScript', 'SQLite', 'PostgreSQL', 'Docker', 'AWS'],
     duration: '16 WEEKS',
     commitment: '12 hrs / week',
     level: 'Comprehensive',
-    capstone: 'Deploy a multi-tenant SaaS application with real-time auth, payments, and CI/CD.',
+    capstone: 'Deploy a multi-tenant SaaS application with custom in-house auth, payments, and CI/CD.',
     syllabus: [
       'Foundations of Modern JavaScript & TypeScript Typing',
       'React 19 Server Components & Next.js 16 App Router',
-      'Relational Database Modeling with Supabase / PostgreSQL',
-      'API Security, Auth Workflows & Production Deployment',
+      'Relational Database Modeling with SQLite & PostgreSQL',
+      'Custom API Security, JWT Auth Engines & Production Deployment',
     ],
   },
   {
