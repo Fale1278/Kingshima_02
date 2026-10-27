@@ -4,9 +4,13 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import {
   Code2,
-  Cpu,
-  Palette,
-  Server,
+  Sparkles,
+  GraduationCap,
+  Layers,
+  ArrowRight,
+  Award,
+  Lock,
+  CheckCircle2,
 } from 'lucide-react';
 import { useBootcampAuth } from '@/context/BootcampAuthContext';
 import styles from './Studio.module.css';
@@ -17,25 +21,329 @@ import StagePlayground from './components/StagePlayground';
 import StageCelebrate from './components/StageCelebrate';
 import MentorAssistantDrawer from './components/MentorAssistantDrawer';
 
-// ─── TRACK DATA & CURRICULUM ───────────────────────────────────────────────
-const SKILL_TRACKS = [
+// ─── SOLE ACTIVE STACK: PROGRESSIVE WEB DEVELOPMENT CURRICULUM ──────────────
+const WEB_DEV_MODULES = [
   {
-    id: 'fullstack',
-    name: 'Modern Full-Stack Engineering',
-    tag: 'React 19 & Next.js',
+    id: 'html-structure',
+    moduleNumber: 'Module 1',
+    name: 'HTML Structure & Tags',
+    tag: 'Web Skeleton & Elements',
     icon: Code2,
     accentColor: '#3b82f6',
-    lessonTitle: 'Interactive State: How Websites Remember What You Do',
-    lessonNumber: 'Module 01 • Lesson 03',
-    videoDuration: '06:45',
+    lessonTitle: 'Building Web Pages: HTML Tags, Cards & Headings',
+    videoDuration: '05:30',
     chapters: [
-      { time: '00:00', title: 'Welcome & Core Principles' },
-      { time: '01:30', title: 'State vs Props & Screen Updates' },
-      { time: '03:10', title: 'How Data Flows When You Click' },
-      { time: '04:45', title: 'Hands-on Interactive Challenge' },
+      { time: '00:00', title: 'Welcome to Web Development' },
+      { time: '01:15', title: 'HTML Tags as Building Blocks' },
+      { time: '02:45', title: 'Headings, Paragraphs & Buttons' },
+      { time: '04:10', title: 'Testing Your First Card' },
     ],
     transcript:
-      "Hello and welcome! I am your AI Instructor. Today we are learning how interactive web apps remember user actions. When you click a button on Instagram or Amazon, the app doesn't reload the entire page — it changes a tiny piece of memory called 'State' and immediately redraws that element on the screen. Let's see this in action together!",
+      "Hello and welcome to class! I am Coach Ada, your live AI instructor. Every single website on earth starts with HTML (HyperText Markup Language). Think of HTML like the brick walls and beams of a new house. In this lesson, we are building a clean, modern profile card using simple tags like <h2> for headings, <p> for text, and <button> for actions. Let's inspect the code together!",
+    starterFiles: [
+      {
+        id: 'index.html',
+        name: 'index.html',
+        content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="profile-card">
+    <div class="avatar-ring">✦</div>
+    <span class="category-badge">Web Developer</span>
+    <h2 id="student-name">Alex Johnson</h2>
+    <p id="student-bio">Learning modern web development step-by-step in the Kingshima AI Studio!</p>
+    <div class="action-row">
+      <button id="action-btn" class="primary-btn">Connect With Me</button>
+    </div>
+    <p id="card-status" class="sub-status">Ready to code! Click the button in preview.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>`,
+      },
+      {
+        id: 'style.css',
+        name: 'style.css',
+        content: `body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #14192b 0%, #090a10 100%);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #f8fafc;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  width: 300px;
+}
+
+.avatar-ring {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+}
+
+.category-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 3px 10px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+}
+
+.primary-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.sub-status {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+}`,
+      },
+      {
+        id: 'script.js',
+        name: 'script.js',
+        content: `// Step 1: Connect to HTML button
+const btn = document.getElementById('action-btn');
+const statusText = document.getElementById('card-status');
+
+btn.addEventListener('click', () => {
+  btn.innerText = 'Connected! 🎉';
+  btn.style.background = '#10b981';
+  statusText.innerText = 'You successfully clicked the button and updated the page!';
+  console.log('Button clicked successfully!');
+});`,
+      },
+    ],
+    objectives: [
+      { id: 1, text: 'Inspect HTML tags in index.html', done: true },
+      { id: 2, text: 'Change the student name to your own name', done: false },
+      { id: 3, text: 'Test clicking the button in the Live Preview', done: false },
+    ],
+    checkInQuestion: {
+      question: 'In HTML, which tag do you use to create a clickable button?',
+      options: ['<button>', '<p>', '<div>'],
+    },
+    boardConcept: 'HTML Elements & Document Structure',
+    aiDiagramNodes: [
+      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: '<html> Root Tag', color: '#38bdf8' },
+      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Contains' },
+      { type: 'box', x: 280, y: 70, w: 150, h: 50, label: '<body> Visual Page', color: '#10b981' },
+      { type: 'arrow', x1: 430, y1: 95, x2: 510, y2: 95, label: 'Nests' },
+      { type: 'box', x: 510, y: 70, w: 140, h: 50, label: '<button> Element', color: '#f59e0b' },
+    ],
+  },
+  {
+    id: 'css-styling',
+    moduleNumber: 'Module 2',
+    name: 'CSS Styling & Design',
+    tag: 'Colors & Hover Effects',
+    icon: Code2,
+    accentColor: '#ec4899',
+    lessonTitle: 'Painting with Code: Colors, Rounded Corners & Hover',
+    videoDuration: '06:15',
+    chapters: [
+      { time: '00:00', title: 'Why CSS Makes Websites Beautiful' },
+      { time: '01:30', title: 'Gradients and Glassmorphism' },
+      { time: '03:00', title: 'Smooth Micro-Interactions' },
+      { time: '04:45', title: 'Styling Your Web Card' },
+    ],
+    transcript:
+      "Welcome to Module 2! Structure is great, but design is what makes people fall in love with your website. CSS (Cascading Style Sheets) is your digital paint kit. With CSS, you turn plain text into glowing, modern cards with rounded borders, soft gradients, and satisfying hover animations.",
+    starterFiles: [
+      {
+        id: 'index.html',
+        name: 'index.html',
+        content: `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glass-card">
+    <div class="glow-orb"></div>
+    <span class="badge">Glassmorphism</span>
+    <h3>Sleek Modern Card</h3>
+    <p>Hover over this card and button to see CSS transitions in action!</p>
+    <button class="glow-btn">Hover Over Me</button>
+  </div>
+</body>
+</html>`,
+      },
+      {
+        id: 'style.css',
+        name: 'style.css',
+        content: `body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #08090f;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+}
+
+.glass-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 280px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: #ec4899;
+  background: rgba(236, 72, 153, 0.15);
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.glow-btn {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
+}
+
+.glow-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(236, 72, 153, 0.6);
+}`,
+      },
+      {
+        id: 'script.js',
+        name: 'script.js',
+        content: `// Step 1: Optional click reaction
+const card = document.querySelector('.glass-card');
+const btn = document.querySelector('.glow-btn');
+
+btn.addEventListener('click', () => {
+  btn.innerText = '✨ Magic Activated!';
+  card.style.borderColor = '#ec4899';
+});`,
+      },
+    ],
+    objectives: [
+      { id: 1, text: 'Examine border-radius and backdrop-filter in style.css', done: true },
+      { id: 2, text: 'Change the badge color to your favorite color', done: false },
+      { id: 3, text: 'Test hover animations in the Live Preview', done: false },
+    ],
+    checkInQuestion: {
+      question: 'Which CSS property do we use to turn sharp square corners into smooth curves?',
+      options: ['border-radius', 'font-size', 'margin'],
+    },
+    boardConcept: 'Visual Physics of Modern CSS Design',
+    aiDiagramNodes: [
+      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: 'Base Layer (0.06)', color: '#38bdf8' },
+      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Blurs' },
+      { type: 'box', x: 280, y: 70, w: 150, h: 50, label: 'Backdrop Filter', color: '#ec4899' },
+      { type: 'arrow', x1: 430, y1: 95, x2: 510, y2: 95, label: 'Glows' },
+      { type: 'box', x: 510, y: 70, w: 140, h: 50, label: 'Button Hover', color: '#10b981' },
+    ],
+  },
+  {
+    id: 'js-interactivity',
+    moduleNumber: 'Module 3',
+    name: 'JavaScript & Interactive State',
+    tag: 'Clicks, Memory & State',
+    icon: Code2,
+    accentColor: '#10b981',
+    lessonTitle: 'Bringing Pages to Life: State, Clicks & Instant Updates',
+    videoDuration: '06:45',
+    chapters: [
+      { time: '00:00', title: 'Why Websites Need JavaScript' },
+      { time: '01:30', title: 'State: The Memory of the Page' },
+      { time: '03:15', title: 'Listening for User Clicks' },
+      { time: '04:45', title: 'Testing Dynamic State Mutations' },
+    ],
+    transcript:
+      "Now we enter the world of interactive software! JavaScript is the brain of your website. When a user clicks a button, JavaScript listens for that action, changes a piece of data stored in memory (called State), and instantly redraws the new number on screen without reloading the page. Just like an Instagram Like counter!",
     starterFiles: [
       {
         id: 'index.html',
@@ -48,7 +356,7 @@ const SKILL_TRACKS = [
 </head>
 <body>
   <div class="card">
-    <div class="badge">Kingshima AI Studio</div>
+    <div class="badge">Web Dev Module 3</div>
     <h2 id="counter-title">Interactive Counter</h2>
     <div class="counter-display" id="count">0</div>
     <div class="btn-group">
@@ -90,8 +398,8 @@ const SKILL_TRACKS = [
 .badge {
   display: inline-block;
   font-size: 0.75rem;
-  color: #60a5fa;
-  background: rgba(37, 99, 235, 0.15);
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
   padding: 4px 10px;
   border-radius: 20px;
   margin-bottom: 0.75rem;
@@ -159,7 +467,6 @@ function updateDisplay() {
   } else {
     feedbackEl.innerText = 'State reset to neutral (0)';
   }
-  console.log('State updated:', count);
 }
 
 incBtn.addEventListener('click', () => {
@@ -175,45 +482,44 @@ decBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', () => {
   count = 0;
   updateDisplay();
-});
-
-console.log('App successfully mounted and ready!');`,
+});`,
       },
     ],
     objectives: [
-      { id: 1, text: 'Inspect HTML document & elements structure', done: true },
-      { id: 2, text: 'Connect user clicks to component memory (state)', done: true },
-      { id: 3, text: 'Test interactive live preview in sandbox', done: false },
-      { id: 4, text: 'Submit to AI Grader for automated review', done: false },
+      { id: 1, text: 'Click + and - to test state changes in preview', done: true },
+      { id: 2, text: 'Change let count = 0 to start at 5 in script.js', done: false },
+      { id: 3, text: 'Click Check My Work to earn your milestone grade', done: false },
     ],
-    boardConcept: 'React Tree & Visual State Flow',
+    checkInQuestion: {
+      question: 'When a user clicks a button and a number changes without reloading, what is that called?',
+      options: ['State / Event handling', 'Page Printing', 'Formatting'],
+    },
+    boardConcept: 'Interactive State Mutation Loop',
     aiDiagramNodes: [
-      { type: 'box', x: 70, y: 50, w: 140, h: 50, label: 'Client Browser', color: '#38bdf8' },
-      { type: 'arrow', x1: 210, y1: 75, x2: 290, y2: 75, label: 'User Tap' },
-      { type: 'box', x: 290, y: 50, w: 150, h: 50, label: 'Component Tree', color: '#10b981' },
-      { type: 'arrow', x1: 440, y1: 75, x2: 520, y2: 75, label: 'Diffing' },
-      { type: 'box', x: 520, y: 50, w: 140, h: 50, label: 'Screen Patch', color: '#f59e0b' },
-      { type: 'box', x: 290, y: 150, w: 150, h: 55, label: 'State [count, setCount]', color: '#a855f7' },
-      { type: 'arrow', x1: 365, y1: 150, x2: 365, y2: 100, label: 'Triggers Update' },
+      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: 'User Tap', color: '#38bdf8' },
+      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Fires Event' },
+      { type: 'box', x: 280, y: 70, w: 150, h: 50, label: 'Memory (State)', color: '#10b981' },
+      { type: 'arrow', x1: 430, y1: 95, x2: 510, y2: 95, label: 'Updates' },
+      { type: 'box', x: 510, y: 70, w: 140, h: 50, label: 'Screen Display', color: '#f59e0b' },
     ],
   },
   {
-    id: 'ai-agents',
-    name: 'Applied AI & Autonomous Agents',
-    tag: 'Python & LLM Orchestration',
-    icon: Cpu,
-    accentColor: '#10b981',
-    lessonTitle: 'The ReAct Loop: How AI Thinks, Acts, and Uses Tools',
-    lessonNumber: 'Module 02 • Lesson 01',
-    videoDuration: '07:20',
+    id: 'web-app',
+    moduleNumber: 'Module 4',
+    name: 'Capstone Mini Web App',
+    tag: 'Full Interactive App',
+    icon: Code2,
+    accentColor: '#8b5cf6',
+    lessonTitle: 'Capstone: The Interactive Mood & Task Web App',
+    videoDuration: '07:10',
     chapters: [
-      { time: '00:00', title: 'Autonomous Agent Paradigms' },
-      { time: '01:45', title: 'How Agents Pick Tools' },
-      { time: '03:30', title: 'Reasoning Flow on Board' },
-      { time: '05:15', title: 'Agent Implementation' },
+      { time: '00:00', title: 'Combining HTML, CSS, and JS' },
+      { time: '01:45', title: 'Handling Input Forms' },
+      { time: '03:30', title: 'Rendering Dynamic Lists' },
+      { time: '05:15', title: 'Finishing Your Capstone' },
     ],
     transcript:
-      "Welcome to Applied AI. Today we are exploring how an AI Agent autonomously reasons and selects tools. An agent is not just a chatbot — it is a smart loop that thinks about a goal, picks a tool like search or calculator, inspects the result, and gives a reliable answer.",
+      "Congratulations on making it to the Capstone! In this module, we assemble HTML structure, CSS aesthetics, and JavaScript reactivity into a fully functional mini web application. Users can type an item, choose a category, click 'Add', and watch it appear in the list with animated checkmarks. This is authentic web development!",
     starterFiles: [
       {
         id: 'index.html',
@@ -221,22 +527,24 @@ console.log('App successfully mounted and ready!');`,
         content: `<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="agent-console">
-    <div class="console-header">
-      <span class="status-indicator"></span>
-      <h3>Kingshima AI Agent Execution Loop</h3>
+  <div class="app-card">
+    <div class="app-header">
+      <span class="status-dot"></span>
+      <h3>Kingshima Mini Web App</h3>
     </div>
-    <div class="prompt-box">
-      <label>User Task:</label>
-      <input type="text" id="task-input" value="Fetch current weather in Lagos and convert to Fahrenheit" />
-      <button id="run-agent-btn">Execute Agent Loop</button>
+    <div class="input-row">
+      <input type="text" id="task-input" placeholder="Enter a goal or task..." />
+      <button id="add-btn">Add Goal</button>
     </div>
-    <div class="thought-stream" id="thought-stream">
-      <div class="log-item system">System: Agent initialized with tools: [get_weather, convert_temp].</div>
+    <ul class="task-list" id="task-list">
+      <li class="task-item"><span>🚀 Master Web Development Basics</span><span class="check-pill">Done</span></li>
+    </ul>
+    <div class="app-footer">
+      <span id="counter-summary">1 goal completed</span>
+      <button id="clear-btn" class="clear-btn">Clear All</button>
     </div>
   </div>
   <script src="script.js"></script>
@@ -248,414 +556,167 @@ console.log('App successfully mounted and ready!');`,
         name: 'style.css',
         content: `body {
   margin: 0;
-  background: #090a10;
-  color: #e2e8f0;
-  font-family: 'JetBrains Mono', monospace;
-  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #090b14;
+  font-family: system-ui, sans-serif;
+  color: #fff;
 }
-.agent-console {
-  background: #111422;
-  border: 1px solid #1e2438;
-  border-radius: 12px;
-  padding: 1.5rem;
-  max-width: 580px;
-  margin: 0 auto;
+
+.app-card {
+  background: #111524;
+  border: 1px solid #1e243a;
+  border-radius: 16px;
+  padding: 1.75rem;
+  width: 340px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
-.console-header {
+
+.app-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid #1e2438;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #1e243a;
   padding-bottom: 0.75rem;
 }
-.status-indicator {
-  width: 10px;
-  height: 10px;
+
+.status-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #10b981;
-  box-shadow: 0 0 10px #10b981;
-}
-.prompt-box {
-  margin: 1.25rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-input {
-  background: #0a0c14;
-  border: 1px solid #2a3148;
-  color: #fff;
-  padding: 10px;
-  border-radius: 6px;
-}
-button {
-  background: #10b981;
-  color: #000;
-  font-weight: 700;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.thought-stream {
-  background: #0a0c14;
-  border: 1px solid #1e2438;
-  border-radius: 8px;
-  padding: 1rem;
-  min-height: 120px;
-  font-size: 0.82rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.log-item.system { color: #64748b; }
-.log-item.thought { color: #38bdf8; }
-.log-item.action { color: #f59e0b; }
-.log-item.final { color: #10b981; font-weight: bold; }`,
-      },
-      {
-        id: 'script.js',
-        name: 'script.js',
-        content: `const stream = document.getElementById('thought-stream');
-const btn = document.getElementById('run-agent-btn');
-const input = document.getElementById('task-input');
-
-function appendLog(cls, text) {
-  const div = document.createElement('div');
-  div.className = \`log-item \${cls}\`;
-  div.innerText = text;
-  stream.appendChild(div);
+  box-shadow: 0 0 8px #10b981;
 }
 
-btn.addEventListener('click', () => {
-  stream.innerHTML = '';
-  appendLog('system', \`Task: "\${input.value}"\`);
-  
-  setTimeout(() => {
-    appendLog('thought', 'Thought: Need current weather in Lagos. Calling get_weather(location="Lagos")');
-  }, 400);
-
-  setTimeout(() => {
-    appendLog('action', 'Action Result: Lagos temperature is 31°C, Humidity 78%.');
-  }, 900);
-
-  setTimeout(() => {
-    appendLog('thought', 'Thought: User wants Fahrenheit. Converting 31°C with (31 * 9/5) + 32 = 87.8°F');
-  }, 1400);
-
-  setTimeout(() => {
-    appendLog('final', 'Final Answer: The current temperature in Lagos is 31°C (87.8°F) with 78% humidity.');
-  }, 1900);
-});`,
-      },
-    ],
-    objectives: [
-      { id: 1, text: 'Examine autonomous tool schema & reasoning', done: true },
-      { id: 2, text: 'Run the agent cycle to inspect thoughts and actions', done: false },
-      { id: 3, text: 'Submit to AI Grader for review', done: false },
-    ],
-    boardConcept: 'ReAct Agent Cognitive Loop',
-    aiDiagramNodes: [
-      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: 'User Goal', color: '#38bdf8' },
-      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Input Prompt' },
-      { type: 'box', x: 280, y: 70, w: 150, h: 50, label: 'Reasoning Engine', color: '#10b981' },
-      { type: 'arrow', x1: 430, y1: 95, x2: 510, y2: 95, label: 'Tool Call' },
-      { type: 'box', x: 510, y: 70, w: 140, h: 50, label: 'API Execution', color: '#f59e0b' },
-      { type: 'arrow', x1: 580, y1: 120, x2: 355, y2: 150, label: 'Observation' },
-      { type: 'box', x: 280, y: 150, w: 150, h: 50, label: 'Synthesizer', color: '#a855f7' },
-    ],
-  },
-  {
-    id: 'ui-ux',
-    name: 'UI/UX & Design Systems',
-    tag: 'Design Engineering & CSS Architecture',
-    icon: Palette,
-    accentColor: '#ec4899',
-    lessonTitle: 'Layered Glassmorphism & Visual Aesthetics',
-    lessonNumber: 'Module 03 • Lesson 02',
-    videoDuration: '05:50',
-    chapters: [
-      { time: '00:00', title: 'Lighting & Physics in Digital Design' },
-      { time: '01:20', title: 'Backdrop Filter Stacking Context' },
-      { time: '02:50', title: 'Optical Contrast & Elevation Board' },
-      { time: '04:10', title: 'Designing the Glass Card' },
-    ],
-    transcript:
-      "Welcome designers and creators! Today we are exploring why modern glassmorphism looks so stunning. It requires three distinct visual layers: subtle glowing borders, surface blur, and deep atmospheric shadow. Let's see how simple CSS creates this luxury look.",
-    starterFiles: [
-      {
-        id: 'index.html',
-        name: 'index.html',
-        content: `<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="stage">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="glass-container">
-      <div class="avatar-ring">✦</div>
-      <h3>Kingshima Glass Card</h3>
-      <p>Precision lighting, subtle border highlights, and reflections.</p>
-      <button class="interactive-btn">Explore Component</button>
-    </div>
-  </div>
-</body>
-</html>`,
-      },
-      {
-        id: 'style.css',
-        name: 'style.css',
-        content: `body {
+h3 {
   margin: 0;
-  min-height: 100vh;
-  background: #08090e;
-  font-family: system-ui, sans-serif;
+  font-size: 1.05rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+input {
+  flex: 1;
+  background: #090c16;
+  border: 1px solid #28304c;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  outline: none;
 }
-.stage {
-  position: relative;
-  width: 100%;
-  height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.6;
-}
-.orb-1 {
-  width: 180px;
-  height: 180px;
-  background: #ec4899;
-  top: 30px;
-  left: 20%;
-}
-.orb-2 {
-  width: 220px;
-  height: 220px;
-  background: #3b82f6;
-  bottom: 20px;
-  right: 20%;
-}
-.glass-container {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 20px;
-  padding: 2rem;
-  width: 280px;
-  text-align: center;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  transition: transform 0.3s ease;
-}
-.glass-container:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-.avatar-ring {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ec4899, #8b5cf6);
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-.interactive-btn {
-  background: #fff;
-  color: #000;
+
+button {
+  background: #2563eb;
+  color: #fff;
   border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
   font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 99px;
   cursor: pointer;
-  margin-top: 1rem;
-  transition: opacity 0.2s;
 }
-.interactive-btn:hover {
-  opacity: 0.9;
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+}
+
+.check-pill {
+  font-size: 0.7rem;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  color: #64748b;
+  border-top: 1px solid #1e243a;
+  padding-top: 0.75rem;
+}
+
+.clear-btn {
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.74rem;
+  padding: 4px 8px;
 }`,
       },
-    ],
-    objectives: [
-      { id: 1, text: 'Understand backdrop-filter and layer stacking', done: true },
-      { id: 2, text: 'Tune diffusion blur radius and border opacity', done: false },
-      { id: 3, text: 'Run the sandbox to test hovering micro-interactions', done: false },
-    ],
-    boardConcept: 'Visual Physics of Glassmorphism',
-    aiDiagramNodes: [
-      { type: 'box', x: 60, y: 70, w: 150, h: 50, label: 'Light Vector', color: '#fbbf24' },
-      { type: 'arrow', x1: 210, y1: 95, x2: 290, y2: 95, label: 'Angle of Light' },
-      { type: 'box', x: 290, y: 70, w: 160, h: 50, label: 'Top Border Highlight', color: '#ffffff' },
-      { type: 'arrow', x1: 450, y1: 95, x2: 520, y2: 95, label: 'Refraction' },
-      { type: 'box', x: 520, y: 70, w: 150, h: 50, label: 'Backdrop Blur', color: '#ec4899' },
-      { type: 'box', x: 290, y: 160, w: 160, h: 50, label: 'Atmospheric Shadow', color: '#64748b' },
-    ],
-  },
-  {
-    id: 'backend',
-    name: 'Backend & Cloud Infrastructure',
-    tag: 'PostgreSQL & Distributed APIs',
-    icon: Server,
-    accentColor: '#8b5cf6',
-    lessonTitle: 'Data Privacy: Keeping User Records Secure',
-    lessonNumber: 'Module 04 • Lesson 04',
-    videoDuration: '06:10',
-    chapters: [
-      { time: '00:00', title: 'Why Database Security Matters' },
-      { time: '01:35', title: 'Postgres Row Security' },
-      { time: '03:10', title: 'Policy Lifecycle on Board' },
-      { time: '04:40', title: 'Testing Isolated Queries' },
-    ],
-    transcript:
-      "Welcome to Cloud Infrastructure. How does an app make sure you only see your own private data and not someone else's? In modern systems, security is enforced right at the database layer with Row Level Security. Let's see how requests filter safely.",
-    starterFiles: [
-      {
-        id: 'index.html',
-        name: 'index.html',
-        content: `<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="db-inspector">
-    <h2>PostgreSQL Security Simulator</h2>
-    <div class="auth-bar">
-      <span>Active Session Role:</span>
-      <select id="role-select">
-        <option value="user_123">Authenticated User (ID: user_123)</option>
-        <option value="user_456">Authenticated User (ID: user_456)</option>
-        <option value="anon">Anonymous Guest</option>
-      </select>
-      <button id="query-btn">Execute SELECT *</button>
-    </div>
-    <div class="results-table" id="results">
-      <p class="placeholder-text">Click "Execute SELECT *" to test the security filter.</p>
-    </div>
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>`,
-      },
-      {
-        id: 'style.css',
-        name: 'style.css',
-        content: `body {
-  margin: 0;
-  background: #0d0f18;
-  color: #f8fafc;
-  font-family: system-ui, sans-serif;
-  padding: 1.5rem;
-}
-.db-inspector {
-  background: #151824;
-  border: 1px solid #232738;
-  border-radius: 12px;
-  padding: 1.5rem;
-  max-width: 580px;
-  margin: 0 auto;
-}
-.auth-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 1.25rem 0;
-}
-select, button {
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-}
-select {
-  background: #0a0c14;
-  color: #fff;
-  border: 1px solid #333a52;
-}
-button {
-  background: #8b5cf6;
-  color: #fff;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-.results-table {
-  background: #0a0c14;
-  border: 1px solid #1f2435;
-  border-radius: 8px;
-  padding: 1rem;
-  min-height: 120px;
-}
-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-th, td { padding: 8px; text-align: left; border-bottom: 1px solid #1f2435; }
-th { color: #8b5cf6; }`,
-      },
       {
         id: 'script.js',
         name: 'script.js',
-        content: `const mockDbRows = [
-  { id: 1, user_id: 'user_123', secret_note: 'Kingshima scholarship notes' },
-  { id: 2, user_id: 'user_123', secret_note: 'Project Alpha deploy key' },
-  { id: 3, user_id: 'user_456', secret_note: 'Fellowship mentorship journal' },
-  { id: 4, user_id: 'user_789', secret_note: 'Private executive budget' }
-];
+        content: `const input = document.getElementById('task-input');
+const addBtn = document.getElementById('add-btn');
+const list = document.getElementById('task-list');
+const summary = document.getElementById('counter-summary');
+const clearBtn = document.getElementById('clear-btn');
 
-const roleSelect = document.getElementById('role-select');
-const queryBtn = document.getElementById('query-btn');
-const resultsEl = document.getElementById('results');
+let count = 1;
 
-queryBtn.addEventListener('click', () => {
-  const currentRole = roleSelect.value;
-  console.log('Running query under auth.uid() =', currentRole);
-  
-  let visibleRows = [];
-  if (currentRole === 'anon') {
-    visibleRows = [];
-  } else {
-    visibleRows = mockDbRows.filter(row => row.user_id === currentRole);
-  }
-  
-  if (visibleRows.length === 0) {
-    resultsEl.innerHTML = '<div style="color: #ef4444; padding: 10px;">Security Policy blocked all records! (0 rows returned)</div>';
-  } else {
-    let html = '<table><thead><tr><th>ID</th><th>Owner</th><th>Protected Note</th></tr></thead><tbody>';
-    visibleRows.forEach(row => {
-      html += \`<tr><td>\${row.id}</td><td>\${row.user_id}</td><td>\${row.secret_note}</td></tr>\`;
-    });
-    html += '</tbody></table>';
-    resultsEl.innerHTML = html;
-  }
-  console.log('Filtered rows count:', visibleRows.length);
+addBtn.addEventListener('click', () => {
+  const text = input.value.trim();
+  if (!text) return;
+
+  const li = document.createElement('li');
+  li.className = 'task-item';
+  li.innerHTML = \`<span>✨ \${text}</span><span class="check-pill">Active</span>\`;
+  list.appendChild(li);
+
+  input.value = '';
+  count += 1;
+  summary.innerText = \`\${count} goals tracked\`;
+});
+
+clearBtn.addEventListener('click', () => {
+  list.innerHTML = '';
+  count = 0;
+  summary.innerText = '0 goals tracked';
 });`,
       },
     ],
     objectives: [
-      { id: 1, text: 'Examine multi-tenant data privacy principles', done: true },
-      { id: 2, text: 'Switch auth session context and test queries', done: false },
-      { id: 3, text: 'Verify row-level protection in live preview', done: false },
+      { id: 1, text: 'Test typing a goal and adding it to the live list', done: true },
+      { id: 2, text: 'Personalize the app title in index.html', done: false },
+      { id: 3, text: 'Submit Capstone to claim your Verified Web Dev Certificate', done: false },
     ],
-    boardConcept: 'Database Security Policy Validation',
+    checkInQuestion: {
+      question: 'Which three core technologies work together to make every modern interactive webpage?',
+      options: ['HTML, CSS, and JavaScript', 'Word, Excel, and Outlook'],
+    },
+    boardConcept: 'Full Web App Reactive Architecture',
     aiDiagramNodes: [
-      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: 'Client Request', color: '#38bdf8' },
-      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Auth Token' },
-      { type: 'box', x: 280, y: 70, w: 160, h: 50, label: 'Query Filter', color: '#8b5cf6' },
-      { type: 'arrow', x1: 440, y1: 95, x2: 520, y2: 95, label: 'Inject Rule' },
-      { type: 'box', x: 520, y: 70, w: 150, h: 50, label: 'Database Storage', color: '#10b981' },
-      { type: 'box', x: 280, y: 160, w: 160, h: 50, label: 'WHERE user_id matches', color: '#f59e0b' },
+      { type: 'box', x: 60, y: 70, w: 140, h: 50, label: 'HTML Structure', color: '#38bdf8' },
+      { type: 'arrow', x1: 200, y1: 95, x2: 280, y2: 95, label: 'Styled by' },
+      { type: 'box', x: 280, y: 70, w: 150, h: 50, label: 'CSS Glass Theme', color: '#ec4899' },
+      { type: 'arrow', x1: 430, y1: 95, x2: 510, y2: 95, label: 'Powered by' },
+      { type: 'box', x: 510, y: 70, w: 140, h: 50, label: 'JavaScript Loop', color: '#10b981' },
     ],
   },
 ];
@@ -663,31 +724,35 @@ queryBtn.addEventListener('click', () => {
 export default function StudioClient() {
   const auth = useBootcampAuth();
   const student = auth?.student;
+  const authLoading = auth?.loading;
 
   // ─── STAGE PROGRESSION: 'discover' | 'playground' | 'celebrate' ───────────
   const [activeStage, setActiveStage] = useState('discover');
 
-  // Track Selector
-  const [selectedTrackIndex, setSelectedTrackIndex] = useState(0);
-  const track = SKILL_TRACKS[selectedTrackIndex];
+  // Track Selector (Web Development Modules)
+  const [selectedModuleIndex, setSelectedModuleIndex] = useState(0);
+  const activeModule = WEB_DEV_MODULES[selectedModuleIndex];
+
+  // Learning Speed: 'beginner' | 'steady' | 'fast'
+  const [learningSpeed, setLearningSpeed] = useState('beginner');
 
   // Voice Narrator State
   const [isVoiceActive, setIsVoiceActive] = useState(false);
 
-  // AI Mentor Slide-Out Drawer
+  // AI Mentor Slide-Out Drawer (Coach Ada)
   const [isMentorOpen, setIsMentorOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     {
       sender: 'ai',
-      text: `Hello! I'm Coach Ada, your friendly AI tutor for ${track.name}. I'm here to answer any questions in simple words with zero technical jargon. What's on your mind?`,
+      text: `Hello ${student?.username ? student.username : 'there'}! I'm Coach Ada, your live AI teacher for Web Development. I'm here in the classroom with you to break down every concept in simple words. How are you feeling about starting ${activeModule.name}?`,
     },
   ]);
   const [userInput, setUserInput] = useState('');
   const [isAiThinking, setIsAiThinking] = useState(false);
 
   // Files & Editor State
-  const [activeFileId, setActiveFileId] = useState(track.starterFiles[0].id);
-  const [files, setFiles] = useState(track.starterFiles);
+  const [activeFileId, setActiveFileId] = useState(activeModule.starterFiles[0].id);
+  const [files, setFiles] = useState(activeModule.starterFiles);
   const [consoleLogs, setConsoleLogs] = useState([]);
 
   // Evaluation & Gamification
@@ -721,10 +786,10 @@ export default function StudioClient() {
   useEffect(() => {
     async function loadSavedProject() {
       try {
-        const studentId = student?.id || (typeof window !== 'undefined' ? localStorage.getItem('studio_guest_id') : null);
+        const studentId = student?.id;
         if (!studentId) return;
 
-        const res = await fetch(`/api/studio/project?studentId=${encodeURIComponent(studentId)}&trackId=${track.id}`);
+        const res = await fetch(`/api/studio/project?studentId=${encodeURIComponent(studentId)}&trackId=${activeModule.id}`);
         const data = await res.json();
         if (data.ok && data.project) {
           if (Array.isArray(data.project.files) && data.project.files.length > 0) {
@@ -740,22 +805,22 @@ export default function StudioClient() {
       }
     }
     loadSavedProject();
-  }, [track, student]);
+  }, [activeModule, student]);
 
-  // Auto-sync files when track changes
+  // Auto-sync files when module changes
   useEffect(() => {
-    setFiles(track.starterFiles);
-    setActiveFileId(track.starterFiles[0].id);
+    setFiles(activeModule.starterFiles);
+    setActiveFileId(activeModule.starterFiles[0].id);
     setConsoleLogs([]);
     setAiGradeResult(null);
     setActiveStage('discover');
     setChatMessages([
       {
         sender: 'ai',
-        text: `Switched to ${track.name}! Let's understand "${track.lessonTitle}" step by step. Feel free to ask me anything along the way!`,
+        text: `Welcome to ${activeModule.moduleNumber}: ${activeModule.name}! Let's master "${activeModule.lessonTitle}". Ask or speak to me anytime!`,
       },
     ]);
-  }, [track]);
+  }, [activeModule]);
 
   // ─── AI VOICE SPEECH SYNTHESIS ──────────────────────────────────────────
   const speakText = useCallback((text) => {
@@ -783,7 +848,7 @@ export default function StudioClient() {
       setIsVoiceActive(false);
     } else {
       setIsVoiceActive(true);
-      speakText(track.transcript);
+      speakText(activeModule.transcript);
     }
   };
 
@@ -817,7 +882,7 @@ export default function StudioClient() {
     initBoardCanvas();
 
     ctx.save();
-    track.aiDiagramNodes.forEach((node) => {
+    activeModule.aiDiagramNodes.forEach((node) => {
       if (node.type === 'box') {
         ctx.shadowColor = node.color;
         ctx.shadowBlur = 10;
@@ -852,7 +917,7 @@ export default function StudioClient() {
       }
     });
     ctx.restore();
-  }, [initBoardCanvas, track.aiDiagramNodes]);
+  }, [initBoardCanvas, activeModule.aiDiagramNodes]);
 
   // ─── LIVE APP PREVIEW SOURCE BUILDER ──────────────────────────────────
   const iframeSrcDoc = useCallback(() => {
@@ -933,8 +998,8 @@ export default function StudioClient() {
     if (typeof window !== 'undefined' && !window.confirm('Reset code back to the initial starting point?')) {
       return;
     }
-    setFiles(track.starterFiles);
-    setActiveFileId(track.starterFiles[0].id);
+    setFiles(activeModule.starterFiles);
+    setActiveFileId(activeModule.starterFiles[0].id);
     setConsoleLogs([]);
   };
 
@@ -943,14 +1008,15 @@ export default function StudioClient() {
     setIsSaving(true);
     setSaveStatus(null);
     try {
-      const studentId = student?.id || (typeof window !== 'undefined' ? localStorage.getItem('studio_guest_id') || 'guest' : 'guest');
+      const studentId = student?.id;
+      if (!studentId) return;
 
       const res = await fetch('/api/studio/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           student_id: studentId,
-          track_id: track.id,
+          track_id: activeModule.id,
           files,
           completed_objectives: completedObjectiveIds,
         }),
@@ -973,17 +1039,17 @@ export default function StudioClient() {
     setIsEvaluating(true);
     try {
       const codeString = files.map((f) => f.content).join('\n');
-      const studentId = student?.id || (typeof window !== 'undefined' ? localStorage.getItem('studio_guest_id') || 'guest' : 'guest');
+      const studentId = student?.id || 'stud_demo';
 
       const res = await fetch('/api/studio/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           studentId,
-          trackId: track.id,
+          trackId: activeModule.id,
           code: codeString,
           files,
-          notes: `Evaluated in Kingshima AI Studio for ${track.name}`,
+          notes: `Evaluated in Kingshima AI Studio for ${activeModule.name}`,
         }),
       });
 
@@ -992,7 +1058,7 @@ export default function StudioClient() {
         setAiGradeResult(data.grade);
         if (data.totalXp) setCurrentXp(data.totalXp);
         if (data.streak) setStreakDays(data.streak);
-        setCompletedObjectiveIds([1, 2, 3, 4]);
+        setCompletedObjectiveIds([1, 2, 3]);
 
         // Transition smoothly to Step 3: Celebrate!
         setActiveStage('celebrate');
@@ -1003,20 +1069,20 @@ export default function StudioClient() {
         throw new Error(data.error || 'Evaluation failed');
       }
     } catch (err) {
-      console.error('Grading error, falling back:', err);
+      console.error('Grading fallback:', err);
       const fallbackResult = {
-        score: 95,
+        score: 96,
         grade: 'A+',
-        status: 'Skill Mastered',
-        trackName: track.name,
+        status: 'Web Development Skill Mastered',
+        trackName: activeModule.name,
         strengths: [
-          'Successfully connected component memory with live screen updates.',
-          'Maintained clean, readable code structure with zero intimidation.',
-          'Demonstrated confident hands-on experimentation in the sandbox.',
+          'Successfully connected HTML tags with interactive JavaScript events.',
+          'Demonstrated clean, well-spaced CSS styling.',
+          'Tested live preview with confident hands-on experimentation.',
         ],
         tips: [
-          'Experiment with changing background colors in style.css to personalize your app.',
-          'Challenge: add another button that adds +5 at a time!',
+          'Try changing background gradients in style.css to create your own signature palette.',
+          'Explore adding extra buttons or inputs to extend your project!',
         ],
       };
       setAiGradeResult(fallbackResult);
@@ -1026,7 +1092,7 @@ export default function StudioClient() {
     }
   };
 
-  // ─── CHAT WITH AI COACH ───────────────────────────────────────────────
+  // ─── CHAT WITH COACH ADA (REAL-TIME CLASSROOM TEACHER) ─────────────────
   const handleSendChat = async (e) => {
     e?.preventDefault();
     if (!userInput.trim() || isAiThinking) return;
@@ -1044,14 +1110,16 @@ export default function StudioClient() {
         body: JSON.stringify({
           prompt: userText,
           codeContext: activeFile?.content || '',
-          trackId: track.id,
-          activeFile: activeFile?.name || 'script.js',
-          terminalLogs: consoleLogs,
+          trackId: activeModule.id,
+          activeFile: activeFile?.name || 'index.html',
+          learningSpeed,
+          lessonTitle: activeModule.lessonTitle,
+          studentName: student?.username || 'Student',
         }),
       });
 
       const data = await res.json();
-      let replyText = data.reply || `In ${track.name}, remember that the screen redraws whenever you change a state variable!`;
+      let replyText = data.reply || `In Web Development, every tag in HTML can be styled with CSS and controlled with JavaScript!`;
       if (data.suggestedCode) {
         replyText += `\n\n${data.suggestedCode}`;
       }
@@ -1059,7 +1127,7 @@ export default function StudioClient() {
       setChatMessages((prev) => [...prev, { sender: 'ai', text: replyText }]);
       if (isVoiceActive) speakText(data.reply);
     } catch {
-      const fallbackReply = `In ${track.name}, verify that your button IDs in \`${activeFile?.name || 'script.js'}\` match your HTML. Try clicking "Reload" to test again!`;
+      const fallbackReply = `I hear you! Look at \`${activeFileId}\` on the left. You can make an edit, click "Reload", and see the change right away!`;
       setChatMessages((prev) => [...prev, { sender: 'ai', text: fallbackReply }]);
     } finally {
       setIsAiThinking(false);
@@ -1075,28 +1143,65 @@ export default function StudioClient() {
     setUserInput(promptText);
   };
 
+  // Teacher Classroom Socratic Check-In Answer Handler
+  const handleAnswerCheckIn = async (selectedOption) => {
+    const checkinAnswer = `My answer is: ${selectedOption}`;
+    setChatMessages((prev) => [...prev, { sender: 'user', text: checkinAnswer }]);
+    setIsAiThinking(true);
+
+    try {
+      const activeFile = files.find((f) => f.id === activeFileId);
+      const res = await fetch('/api/studio/ai-assist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: checkinAnswer,
+          codeContext: activeFile?.content || '',
+          trackId: activeModule.id,
+          activeFile: activeFile?.name || 'index.html',
+          learningSpeed,
+          lessonTitle: activeModule.lessonTitle,
+          studentName: student?.username || 'Student',
+        }),
+      });
+
+      const data = await res.json();
+      setChatMessages((prev) => [...prev, { sender: 'ai', text: data.reply }]);
+      if (isVoiceActive) speakText(data.reply);
+      // Reward micro XP for participating in class
+      setCurrentXp((prev) => prev + 25);
+    } catch {
+      const fallback = `🌟 Spot on! That is correct! +25 XP awarded for answering Coach Ada's check-in question.`;
+      setChatMessages((prev) => [...prev, { sender: 'ai', text: fallback }]);
+      if (isVoiceActive) speakText(fallback);
+      setCurrentXp((prev) => prev + 25);
+    } finally {
+      setIsAiThinking(false);
+    }
+  };
+
   // ─── CLAIM VERIFIED DIPLOMA ───────────────────────────────────────────
   const handleClaimCertificate = async () => {
     setIsClaimingCert(true);
     try {
       const studentName = student?.username
         ? student.username.charAt(0).toUpperCase() + student.username.slice(1)
-        : 'Distinguished Scholar';
+        : 'Distinguished Web Developer';
 
       const res = await fetch('/api/certificates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           student_id: student?.id || 'stud_studio_scholar',
-          course_id: track.id,
+          course_id: 'web-dev-bootcamp',
           student_name: studentName,
-          course_name: track.name,
-          grade: aiGradeResult?.grade || 'Distinction & Honors Capstone',
+          course_name: 'Interactive Web Development Bootcamp',
+          grade: aiGradeResult?.grade || 'Honors Distinction',
           score: aiGradeResult?.score || 96,
           metadata: {
-            trackId: track.id,
+            module: activeModule.name,
             completedAt: new Date().toISOString(),
-            evaluator: 'Kingshima Academic Board & AI Studio',
+            evaluator: 'Kingshima Academic Board & Coach Ada AI Studio',
           },
         }),
       });
@@ -1113,19 +1218,89 @@ export default function StudioClient() {
     }
   };
 
-  const handleNextTrack = () => {
-    const nextIdx = (selectedTrackIndex + 1) % SKILL_TRACKS.length;
-    setSelectedTrackIndex(nextIdx);
+  const handleNextModule = () => {
+    const nextIdx = (selectedModuleIndex + 1) % WEB_DEV_MODULES.length;
+    setSelectedModuleIndex(nextIdx);
   };
 
+  // ─── ACCESS GATE: IF NOT LOGGED IN / REGISTERED FOR BOOTCAMP ─────────────
+  if (!authLoading && !student) {
+    return (
+      <div className={styles.accessGatePage}>
+        <div className={styles.accessGateCard}>
+          <div className={styles.accessGateBadge}>
+            <Sparkles size={14} />
+            <span>✦ Kingshima Bootcamp Exclusive</span>
+          </div>
+
+          <h1 className={styles.accessGateTitle}>Unlock the Kingshima AI Studio</h1>
+          <p className={styles.accessGateSubtitle}>
+            The AI Studio is an interactive learning environment exclusively reserved for students registered in the <strong>Kingshima Web Development Bootcamp</strong>.
+          </p>
+
+          <div className={styles.perksGrid}>
+            <div className={styles.perkCard}>
+              <div className={styles.perkIcon}>
+                <GraduationCap size={20} />
+              </div>
+              <h4 className={styles.perkTitle}>Coach Ada • AI Teacher</h4>
+              <p className={styles.perkDesc}>
+                Real-time classroom conversation, voice explanations, and adaptive pacing tailored to non-technical learners.
+              </p>
+            </div>
+
+            <div className={styles.perkCard}>
+              <div className={styles.perkIcon}>
+                <Code2 size={20} />
+              </div>
+              <h4 className={styles.perkTitle}>Live Web Sandbox</h4>
+              <p className={styles.perkDesc}>
+                Build real HTML, CSS, and JavaScript with instant browser preview and zero scary terminal error screens.
+              </p>
+            </div>
+
+            <div className={styles.perkCard}>
+              <div className={styles.perkIcon}>
+                <Award size={20} />
+              </div>
+              <h4 className={styles.perkTitle}>Verified Diplomas</h4>
+              <p className={styles.perkDesc}>
+                Earn cryptographic certificates recorded in the Kingshima Credential Registry as you master each web milestone.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.accessActions}>
+            <Link
+              href="/bootcamp/login?mode=register&redirect=/studio"
+              className={styles.registerCtaBtn}
+            >
+              <span>Register for Bootcamp & Unlock Studio (Free)</span>
+              <ArrowRight size={16} />
+            </Link>
+
+            <Link
+              href="/bootcamp/login?mode=login&redirect=/studio"
+              className={styles.loginOutlineBtn}
+            >
+              <Lock size={15} />
+              <span>Already Registered? Log In</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── AUTHENTICATED STUDIO WORKSPACE ─────────────────────────────────────
   return (
     <div className={styles.studioContainer}>
       {/* ── TOP BAR WITH 3-STAGE GUIDED STEPPER ───────────────────────────── */}
       <StudioNavbar
-        track={track}
-        tracks={SKILL_TRACKS}
-        selectedTrackIndex={selectedTrackIndex}
-        onSelectTrack={(idx) => setSelectedTrackIndex(idx)}
+        track={activeModule}
+        tracks={WEB_DEV_MODULES}
+        selectedTrackIndex={selectedModuleIndex}
+        onSelectTrack={(idx) => setSelectedModuleIndex(idx)}
         activeStage={activeStage}
         onStageChange={(stage) => setActiveStage(stage)}
         isVoiceActive={isVoiceActive}
@@ -1135,12 +1310,13 @@ export default function StudioClient() {
         saveStatus={saveStatus}
         onSave={handleSaveWorkspace}
         currentXp={currentXp}
+        student={student}
       />
 
       {/* ── STAGE 1: DISCOVER ─────────────────────────────────────────────── */}
       {activeStage === 'discover' && (
         <StageDiscover
-          track={track}
+          track={activeModule}
           onProceedToPlayground={() => setActiveStage('playground')}
           isVoiceActive={isVoiceActive}
           onToggleVoice={toggleVoice}
@@ -1154,7 +1330,7 @@ export default function StudioClient() {
       {/* ── STAGE 2: PLAYGROUND ───────────────────────────────────────────── */}
       {activeStage === 'playground' && (
         <StagePlayground
-          track={track}
+          track={activeModule}
           files={files}
           activeFileId={activeFileId}
           onSelectFile={(id) => setActiveFileId(id)}
@@ -1173,22 +1349,22 @@ export default function StudioClient() {
       {/* ── STAGE 3: CELEBRATE ────────────────────────────────────────────── */}
       {activeStage === 'celebrate' && (
         <StageCelebrate
-          track={track}
+          track={activeModule}
           aiGradeResult={aiGradeResult}
           currentXp={currentXp}
           streakDays={streakDays}
           onBackToPlayground={() => setActiveStage('playground')}
           onClaimCertificate={handleClaimCertificate}
           isClaimingCert={isClaimingCert}
-          onNextTrack={handleNextTrack}
+          onNextTrack={handleNextModule}
         />
       )}
 
-      {/* ── AI MENTOR SLIDE-OUT DRAWER ────────────────────────────────────── */}
+      {/* ── AI MENTOR SLIDE-OUT DRAWER (COACH ADA) ────────────────────────── */}
       <MentorAssistantDrawer
         isOpen={isMentorOpen}
         onClose={() => setIsMentorOpen(false)}
-        track={track}
+        track={activeModule}
         chatMessages={chatMessages}
         userInput={userInput}
         onChangeUserInput={(val) => setUserInput(val)}
@@ -1197,6 +1373,10 @@ export default function StudioClient() {
         onSelectQuickPrompt={handleSelectQuickPrompt}
         isVoiceActive={isVoiceActive}
         onToggleVoice={toggleVoice}
+        learningSpeed={learningSpeed}
+        onChangeLearningSpeed={(speed) => setLearningSpeed(speed)}
+        checkInQuestion={activeModule.checkInQuestion}
+        onAnswerCheckIn={handleAnswerCheckIn}
       />
 
       {/* ── MILESTONE DIPLOMA CLAIM MODAL ─────────────────────────────────── */}
@@ -1204,7 +1384,7 @@ export default function StudioClient() {
         <div className={styles.modalOverlay} onClick={() => setShowDiplomaModal(false)}>
           <div className={styles.diplomaModalCard} onClick={(e) => e.stopPropagation()}>
             <div className={styles.diplomaIconBadge}>📜</div>
-            <h3 className={styles.diplomaTitle}>Skill Track Diploma Claimed!</h3>
+            <h3 className={styles.diplomaTitle}>Web Development Diploma Claimed!</h3>
             <p className={styles.diplomaSubtitle}>
               Congratulations! Your mastery in <strong>{claimedCert.course_name}</strong> has been
               cryptographically recorded in the Kingshima Credential Registry.

@@ -13,19 +13,24 @@ export default function BootcampLoginPage() {
   const toast = useToast();
 
   const [mode, setMode] = useState('login'); // 'login' | 'register'
+  const [redirectPath, setRedirectPath] = useState('');
   const [form, setForm] = useState({ email: '', username: '', login_code: '' });
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const [registeredStudent, setRegisteredStudent] = useState(null);
   const [registeredCode, setRegisteredCode] = useState('');
-  const [registeredId, setRegisteredId] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const m = params.get('mode');
+      const redir = params.get('redirect');
       if (m === 'register' || m === 'login') {
         setMode(m);
+      }
+      if (redir) {
+        setRedirectPath(redir);
       }
     }
   }, []);
@@ -40,6 +45,7 @@ export default function BootcampLoginPage() {
     setError('');
     setSuccessMsg('');
     setRegisteredCode('');
+    setRegisteredStudent(null);
   };
 
   const handleSubmit = async (e) => {
@@ -50,8 +56,8 @@ export default function BootcampLoginPage() {
     const { email, username, login_code } = form;
 
     if (mode === 'login') {
-      if (!email || !username || !login_code) {
-        setError('Please fill in all fields.');
+      if ((!email && !username) || !login_code) {
+        setError('Please enter your email or username along with your login code.');
         return;
       }
 
@@ -64,17 +70,19 @@ export default function BootcampLoginPage() {
         });
         const data = await res.json();
 
-        if (!res.ok) {
-          setError(data.error || 'Invalid credentials. Please check your email, username, and login code.');
+        if (!res.ok || !data.student) {
+          setError(data.error || 'Invalid credentials. Please verify your email/username and login code.');
           return;
         }
 
-        login(data.student);
+        login(data.student, data.token);
         toast.success(`Welcome back, ${data.student.username}!`);
-        router.push('/bootcamp/dashboard');
+        
+        const target = redirectPath || '/bootcamp/dashboard';
+        router.push(target);
       } catch (err) {
         console.error(err);
-        setError('Something went wrong. Please try again.');
+        setError('Something went wrong during login. Please try again.');
         toast.error('Something went wrong. Please try again.');
       } finally {
         setLoading(false);
@@ -82,7 +90,7 @@ export default function BootcampLoginPage() {
     } else {
       // Registration Mode
       if (!email || !username) {
-        setError('Please fill in both email and username.');
+        setError('Please fill in both your email address and preferred username.');
         return;
       }
 
@@ -95,38 +103,31 @@ export default function BootcampLoginPage() {
         });
         const data = await res.json();
 
-        if (!res.ok) {
-          setError(data.error || 'Something went wrong. Please try again.');
+        if (!res.ok || !data.student) {
+          setError(data.error || 'Registration failed. A student with this email or username may already exist.');
           return;
         }
 
         setRegisteredCode(data.login_code);
-        setRegisteredId(data.student.id);
-        setSuccessMsg('Registration successful! Save the code below to log in later.');
+        setRegisteredStudent(data.student);
+        setSuccessMsg('Registration successful! You are now enrolled in the Kingshima Web Development Bootcamp.');
         
-        // Auto update the login form's login_code so they can log in easily
+        // Auto-login locally so the session is active immediately
+        login(data.student, data.token);
+
+        toast.success(`Welcome, ${data.student.username}! Your account has been created.`);
         setForm((prev) => ({ ...prev, login_code: data.login_code }));
       } catch (err) {
         console.error(err);
-        setError('Failed to register. Please try again.');
+        setError('Failed to register. Please check your internet connection and try again.');
       } finally {
         setLoading(false);
       }
     }
   };
 
-  const handleAutoLogin = () => {
-    if (!registeredCode) return;
-    const student = {
-      id: registeredId,
-      username: form.username.trim().toLowerCase(),
-      email: form.email.trim().toLowerCase(),
-      login_code: registeredCode,
-      progress: [],
-      application_paid: false,
-    };
-    login(student);
-    router.push('/bootcamp/dashboard');
+  const handleEnterWorkspace = (targetUrl) => {
+    router.push(targetUrl);
   };
 
   return (
@@ -163,18 +164,18 @@ export default function BootcampLoginPage() {
         <div className={styles.header}>
           <h1 className={styles.title}>
             {registeredCode 
-              ? 'Registration Complete' 
+              ? 'Enrolled Successfully! 🎉' 
               : mode === 'login' 
               ? 'Student Login' 
-              : 'Student Registration'
+              : 'Web Development Bootcamp Registration'
             }
           </h1>
           <p className={styles.subtitle}>
             {registeredCode 
-              ? 'Your account has been created. Save your login code below to log in.'
+              ? 'Your student account is active. Your AI Studio workspace and curriculum are now unlocked!'
               : mode === 'login'
-              ? 'Enter your credentials to access your student dashboard.'
-              : 'Sign up to start taking courses and tracking your progress.'
+              ? 'Sign in to access your student dashboard and interactive AI Studio.'
+              : 'Register for free to unlock the Kingshima AI Studio and start mastering Web Development step-by-step.'
             }
           </p>
         </div>
@@ -186,31 +187,31 @@ export default function BootcampLoginPage() {
               <span className={styles.codeVal}>{registeredCode}</span>
             </div>
             <p className={styles.hint} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
-              ⚠️ Make sure to copy this code. It is required to log in to your dashboard in the future.
+              💡 <strong>Save this code!</strong> You can use it anytime to log back into your Kingshima account.
             </p>
-            <p className={styles.hint} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
-              Registration is free. A small one-time acceptance fee unlocks full access to every course — you&apos;ll be prompted for it on your dashboard.
-            </p>
+
             <button
               type="button"
-              onClick={handleAutoLogin}
+              onClick={() => handleEnterWorkspace(redirectPath || '/studio')}
               className={styles.submitBtn}
+              style={{ background: 'linear-gradient(135deg, #2563eb, #3b82f6)', marginBottom: '8px' }}
             >
-              Enter Dashboard →
+              🚀 Launch Web Dev AI Studio →
             </button>
+
             <button
               type="button"
-              onClick={() => handleToggleMode('login')}
-              className={styles.footerLink}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'block', margin: '0 auto' }}
+              onClick={() => handleEnterWorkspace('/bootcamp/dashboard')}
+              className={styles.submitBtn}
+              style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#fff', border: '1px solid rgba(255, 255, 255, 0.15)' }}
             >
-              Back to Login Page
+              Go to Bootcamp Dashboard →
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={styles.form} noValidate>
             <div className={styles.field}>
-              <label htmlFor="email" className={styles.label}>Email address</label>
+              <label htmlFor="email" className={styles.label}>Email Address</label>
               <input
                 id="email"
                 name="email"
@@ -231,7 +232,7 @@ export default function BootcampLoginPage() {
                 name="username"
                 type="text"
                 autoComplete="username"
-                placeholder="your_username"
+                placeholder="choose_a_username"
                 value={form.username}
                 onChange={handleChange}
                 className={styles.input}
@@ -246,14 +247,14 @@ export default function BootcampLoginPage() {
                   id="login_code"
                   name="login_code"
                   type="text"
-                  placeholder="Enter your login code"
+                  placeholder="e.g. A8X9K2L1"
                   value={form.login_code}
                   onChange={handleChange}
                   className={styles.input}
                   disabled={loading}
                 />
                 <span className={styles.hint}>
-                  Your unique login code is provided after registration.
+                  Enter the 8-character code you received when registering.
                 </span>
               </div>
             )}
@@ -273,9 +274,9 @@ export default function BootcampLoginPage() {
               {loading ? (
                 <span className={styles.spinner} aria-hidden="true" />
               ) : mode === 'login' ? (
-                'Access Dashboard →'
+                redirectPath === '/studio' ? 'Log In & Open AI Studio →' : 'Access Dashboard →'
               ) : (
-                'Register & Get Code →'
+                'Register & Unlock AI Studio →'
               )}
             </button>
           </form>
@@ -285,24 +286,24 @@ export default function BootcampLoginPage() {
           <p className={styles.footer}>
             {mode === 'login' ? (
               <>
-                Not enrolled yet?{' '}
+                Not enrolled in Bootcamp yet?{' '}
                 <button
                   type="button"
                   onClick={() => handleToggleMode('register')}
                   className={styles.footerLink}
                 >
-                  Register here
+                  Register here (Free)
                 </button>
               </>
             ) : (
               <>
-                Already have an account?{' '}
+                Already registered as a student?{' '}
                 <button
                   type="button"
                   onClick={() => handleToggleMode('login')}
                   className={styles.footerLink}
                 >
-                  Log in here
+                  Log in with your code
                 </button>
               </>
             )}

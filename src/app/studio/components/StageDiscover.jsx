@@ -13,6 +13,7 @@ import {
   Database,
   Layers,
   PenTool,
+  GraduationCap,
 } from 'lucide-react';
 import styles from '../Studio.module.css';
 
@@ -38,8 +39,7 @@ export default function StageDiscover({
     } else {
       setIsPlayingAudio(true);
       speakText(track.transcript);
-      // Auto reset play state after typical speech duration
-      setTimeout(() => setIsPlayingAudio(false), 15000);
+      setTimeout(() => setIsPlayingAudio(false), 16000);
     }
   };
 
@@ -53,6 +53,38 @@ export default function StageDiscover({
     }
   };
 
+  const getModuleTakeaways = () => {
+    if (track.id === 'html-structure') {
+      return [
+        { title: 'HTML is the Skeleton', text: 'It creates every heading, paragraph, button, and image on the web page.' },
+        { title: 'Tags Wrap Content', text: 'Tags like <button>Click</button> tell the web browser exactly what role an element plays.' },
+        { title: 'Why You Learn This', text: 'Every web page on the internet is built from these exact foundational tags.' },
+      ];
+    }
+    if (track.id === 'css-styling') {
+      return [
+        { title: 'CSS is the Digital Paint', text: 'It controls colors, font styles, spacing, and glowing gradients.' },
+        { title: 'Modern Glassmorphism', text: 'Using border-radius and backdrop-filter: blur creates sleek, luxury interfaces.' },
+        { title: 'Micro-Interactions', text: 'Hover transitions make buttons lift and glow when users move their mouse over them.' },
+      ];
+    }
+    if (track.id === 'web-app') {
+      return [
+        { title: 'All Three in Harmony', text: 'HTML structure + CSS design + JavaScript reactivity = a complete interactive application.' },
+        { title: 'Dynamic Lists & State', text: 'User inputs are tracked in memory and instantly rendered on the screen.' },
+        { title: 'Authentic Tech Skill', text: 'You are now creating real software that works in every modern browser worldwide.' },
+      ];
+    }
+    // Default / js-interactivity
+    return [
+      { title: 'State is Page Memory', text: 'It remembers what numbers or items are active right now (like your cart or counter).' },
+      { title: 'Event Listeners', text: 'The browser listens for button clicks and runs a function immediately.' },
+      { title: 'Instant Screen Updates', text: 'The number redraws on the screen in milliseconds without reloading the page.' },
+    ];
+  };
+
+  const takeaways = getModuleTakeaways();
+
   return (
     <div className={styles.stageContainer}>
       <div className={styles.discoverHero}>
@@ -62,7 +94,7 @@ export default function StageDiscover({
         </div>
         <h1 className={styles.stageHeading}>{track.lessonTitle}</h1>
         <p className={styles.stageSubheading}>
-          No prior coding experience needed. Let's understand how modern apps actually work under the hood using simple real-world metaphors.
+          No prior coding experience needed. Let's understand how modern websites actually work under the hood using simple real-world metaphors.
         </p>
       </div>
 
@@ -71,11 +103,11 @@ export default function StageDiscover({
         <div className={styles.discoverStoryCard}>
           <div className={styles.cardHeader}>
             <div className={styles.mentorAvatar}>
-              <track.icon size={24} color={track.accentColor} />
+              <GraduationCap size={24} color={track.accentColor} />
             </div>
             <div>
-              <h3 className={styles.cardTitle}>AI Mentor Explainer</h3>
-              <span className={styles.cardSubtitle}>Dr. K. Ada • Plain-English Guide ({track.videoDuration})</span>
+              <h3 className={styles.cardTitle}>Coach Ada • AI Classroom Teacher</h3>
+              <span className={styles.cardSubtitle}>Plain-English Live Explanation ({track.videoDuration})</span>
             </div>
           </div>
 
@@ -90,7 +122,7 @@ export default function StageDiscover({
             </button>
             <div className={styles.audioWaveformInfo}>
               <span className={styles.audioStatus}>
-                {isPlayingAudio ? 'Speaking now… listen carefully' : 'Click play to listen to this concept'}
+                {isPlayingAudio ? 'Coach Ada is explaining… listen carefully' : 'Click play to listen to Coach Ada speak'}
               </span>
               <div className={styles.audioMiniBars}>
                 {[40, 70, 95, 60, 85, 50, 100, 75].map((h, i) => (
@@ -115,15 +147,11 @@ export default function StageDiscover({
               <span>Key Concept in 3 Simple Bullets:</span>
             </h4>
             <ul className={styles.takeawaysList}>
-              <li>
-                <strong>What is "State"?</strong> It's the website's short-term memory (like remembering what's in your shopping cart).
-              </li>
-              <li>
-                <strong>What happens when you click?</strong> The website listens for your touch, changes the memory, and redraws that part of the screen instantly.
-              </li>
-              <li>
-                <strong>Why you're learning this:</strong> Every modern app (Netflix, Instagram, Uber) is built upon this exact fundamental idea.
-              </li>
+              {takeaways.map((item, idx) => (
+                <li key={idx}>
+                  <strong>{item.title}:</strong> {item.text}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -153,7 +181,7 @@ export default function StageDiscover({
                 title="Whiteboard visual concept"
               />
               <div className={styles.boardCaption}>
-                <span>✦ Visualized automatically by Kingshima AI for {track.name}</span>
+                <span>✦ Visualized automatically by Coach Ada for {track.name}</span>
               </div>
             </div>
           ) : (
@@ -165,7 +193,7 @@ export default function StageDiscover({
                 <div className={styles.flowStepContent}>
                   <span className={styles.flowStepNumber}>Step 1</span>
                   <h4>User Interaction</h4>
-                  <p>A person clicks a button, types text, or toggles a switch.</p>
+                  <p>A person clicks a button, types text, or moves their mouse.</p>
                 </div>
               </div>
 
@@ -177,8 +205,8 @@ export default function StageDiscover({
                 </div>
                 <div className={styles.flowStepContent}>
                   <span className={styles.flowStepNumber}>Step 2</span>
-                  <h4>Website Updates Memory</h4>
-                  <p>The code changes the value (e.g., adds +1 to your count).</p>
+                  <h4>Website Updates Memory (State)</h4>
+                  <p>JavaScript processes the event and updates the internal data.</p>
                 </div>
               </div>
 
@@ -191,7 +219,7 @@ export default function StageDiscover({
                 <div className={styles.flowStepContent}>
                   <span className={styles.flowStepNumber}>Step 3</span>
                   <h4>Screen Automatically Updates</h4>
-                  <p>The user sees the new number immediately with smooth feedback.</p>
+                  <p>The web browser redraws the element with smooth visual feedback.</p>
                 </div>
               </div>
             </div>
@@ -216,14 +244,14 @@ export default function StageDiscover({
       <div className={styles.stageFooter}>
         <div className={styles.footerNote}>
           <CheckCircle2 size={16} color="#34d399" />
-          <span>You understand the core idea. Next, you will test and change it with zero risk.</span>
+          <span>You understand the core idea. Next, let's write and test real code with zero risk.</span>
         </div>
         <button
           type="button"
           className={styles.primaryStageCta}
           onClick={onProceedToPlayground}
         >
-          <span>Ready! Let's Try It Ourselves</span>
+          <span>Ready! Let's Try It In Sandbox</span>
           <ArrowRight size={18} />
         </button>
       </div>

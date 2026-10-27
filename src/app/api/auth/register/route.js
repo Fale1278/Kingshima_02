@@ -37,7 +37,7 @@ export async function POST(req) {
 
     const token = signJwt({ sub: newStudent.id, email: newStudent.email });
 
-    return NextResponse.json({ student: newStudent, login_code: code, token });
+    return NextResponse.json({ ok: true, student: newStudent, login_code: code, token });
   } catch (err) {
     console.error('register error:', err);
     return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });

@@ -4,34 +4,50 @@ import { comparePassword, signJwt } from '@/lib/nodeAuth';
 
 export async function POST(req) {
   try {
-    const { email, username, login_code, password } = await req.json();
-    if (!email || !username) {
-      return NextResponse.json({ error: 'Please fill in both email and username.' }, { status: 400 });
+    const body = await req.json();
+    const email = (body.email || '').trim().toLowerCase();
+    const username = (body.username || '').trim().toLowerCase();
+    const identifier = (body.identifier || '').trim().toLowerCase();
+    const login_code = (body.login_code || '').trim();
+    const password = body.password || '';
+
+    // Allow user to provide identifier alone, or email and username
+    const lookupEmail = email || identifier;
+    const lookupUsername = username || identifier;
+
+    if (!lookupEmail && !lookupUsername) {
+      return NextResponse.json(
+        { error: 'Please enter your email or username.' },
+        { status: 400 }
+      );
     }
 
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanUsername = username.trim().toLowerCase();
-
-    const student = getStudentByEmailOrUsername(cleanEmail, cleanUsername);
+    const student = getStudentByEmailOrUsername(lookupEmail, lookupUsername);
     if (!student) {
       return NextResponse.json(
-        { error: 'Invalid credentials. Student record not found.' },
+        { error: 'No student found with those credentials. Please register first.' },
         { status: 401 }
       );
     }
 
     let isValid = false;
-    if (login_code && student.login_code === login_code.trim()) {
+    if (login_code && student.login_code && student.login_code.toLowerCase() === login_code.toLowerCase()) {
       isValid = true;
     } else if (password && student.password_hash && comparePassword(password, student.password_hash)) {
       isValid = true;
-    } else if (!student.password_hash && !login_code) {
+    } else if (!student.password_hash && !student.login_code) {
       isValid = true;
+    } else if (!login_code && !password && student.login_code) {
+      // If student forgot their code, tell them to use their code
+      return NextResponse.json(
+        { error: 'Please enter your 8-character login code to sign in.' },
+        { status: 401 }
+      );
     }
 
     if (!isValid) {
       return NextResponse.json(
-        { error: 'Invalid credentials. Please check your email, username, and login code.' },
+        { error: 'Invalid login code or password. Please verify and try again.' },
         { status: 401 }
       );
     }
@@ -39,11 +55,12 @@ export async function POST(req) {
     const token = signJwt({ sub: student.id, email: student.email });
 
     return NextResponse.json({
+      ok: true,
       student: { ...student, progress: Array.isArray(student.progress) ? student.progress : [] },
       token,
     });
   } catch (err) {
-    console.error('login error:', err);
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+    console.error('Login error:', err);
+    return NextResponse.json({ error: 'Server error during login. Please try again.' }, { status: 500 });
   }
 }

@@ -1,14 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Sparkles,
   Send,
   X,
   Volume2,
   VolumeX,
+  Mic,
+  MicOff,
   HelpCircle,
   MessageSquare,
+  GraduationCap,
+  Clock,
+  CheckCircle2,
 } from 'lucide-react';
 import styles from '../Studio.module.css';
 
@@ -24,15 +29,69 @@ export default function MentorAssistantDrawer({
   onSelectQuickPrompt,
   isVoiceActive,
   onToggleVoice,
+  learningSpeed = 'beginner',
+  onChangeLearningSpeed,
+  checkInQuestion,
+  onAnswerCheckIn,
 }) {
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
+
   if (!isOpen) return null;
 
   const quickPrompts = [
-    'Explain this code like I am 10 years old.',
-    'What happens if I change the starting number?',
-    'Give me a gentle clue to make a new button.',
-    'How do real apps like Instagram use this?',
+    'Explain this code in simple words.',
+    'What tag creates a button in HTML?',
+    'Why do we use CSS border-radius?',
+    'What does state mean in plain English?',
   ];
+
+  const handleToggleMic = () => {
+    if (typeof window === 'undefined') return;
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRec) {
+      alert('Voice dictation is not supported in this browser. You can type your question!');
+      return;
+    }
+
+    if (isListening && recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRec();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        onChangeUserInput(transcript);
+        setIsListening(false);
+      };
+
+      recognition.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (err) {
+      console.warn('Speech recognition error:', err);
+      setIsListening(false);
+    }
+  };
 
   return (
     <div className={styles.mentorOverlay} onClick={onClose}>
@@ -41,11 +100,13 @@ export default function MentorAssistantDrawer({
         <div className={styles.mentorHeader}>
           <div className={styles.mentorTitleGroup}>
             <div className={styles.mentorIconCircle}>
-              <Sparkles size={16} color="#60a5fa" />
+              <GraduationCap size={18} color="#60a5fa" />
             </div>
             <div>
-              <h3 className={styles.mentorName}>Dr. K. Ada • AI Learning Coach</h3>
-              <span className={styles.mentorStatus}>Always patient, ready to explain in simple words</span>
+              <h3 className={styles.mentorName}>Coach Ada • Live AI Teacher</h3>
+              <span className={styles.mentorStatus}>
+                <span className={styles.liveGreenDot} /> Live in Classroom • Two-Way Dialogue
+              </span>
             </div>
           </div>
 
@@ -68,6 +129,60 @@ export default function MentorAssistantDrawer({
             </button>
           </div>
         </div>
+
+        {/* Adaptive Learning Speed Selector */}
+        <div className={styles.speedSelectorBar}>
+          <span className={styles.speedLabel}>Teaching Pace:</span>
+          <div className={styles.speedPills}>
+            <button
+              type="button"
+              className={`${styles.speedPill} ${learningSpeed === 'beginner' ? styles.speedPillActive : ''}`}
+              onClick={() => onChangeLearningSpeed && onChangeLearningSpeed('beginner')}
+              title="Step-by-step with simple analogies & check-ins"
+            >
+              🐢 Step-by-Step
+            </button>
+            <button
+              type="button"
+              className={`${styles.speedPill} ${learningSpeed === 'steady' ? styles.speedPillActive : ''}`}
+              onClick={() => onChangeLearningSpeed && onChangeLearningSpeed('steady')}
+              title="Standard classroom pace"
+            >
+              🚶 Steady
+            </button>
+            <button
+              type="button"
+              className={`${styles.speedPill} ${learningSpeed === 'fast' ? styles.speedPillActive : ''}`}
+              onClick={() => onChangeLearningSpeed && onChangeLearningSpeed('fast')}
+              title="Concise and fast challenges"
+            >
+              ⚡ Fast
+            </button>
+          </div>
+        </div>
+
+        {/* Socratic Classroom Check-in Card */}
+        {checkInQuestion && (
+          <div className={styles.classroomCheckinCard}>
+            <div className={styles.checkinHeader}>
+              <Sparkles size={14} color="#fbbf24" />
+              <span>Coach Ada's Classroom Check-in:</span>
+            </div>
+            <p className={styles.checkinQuestionText}>{checkInQuestion.question}</p>
+            <div className={styles.checkinOptionsRow}>
+              {checkInQuestion.options.map((opt, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className={styles.checkinOptionBtn}
+                  onClick={() => onAnswerCheckIn && onAnswerCheckIn(opt)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Chat Stream */}
         <div className={styles.mentorChatBody}>
@@ -95,7 +210,7 @@ export default function MentorAssistantDrawer({
                 <span>Coach Ada</span>
               </div>
               <div className={styles.chatMessageBubble}>
-                <span className={styles.thinkingDots}>Thinking through simple explanation…</span>
+                <span className={styles.thinkingDots}>Coach Ada is thinking through the explanation…</span>
               </div>
             </div>
           )}
@@ -118,12 +233,21 @@ export default function MentorAssistantDrawer({
           </div>
         </div>
 
-        {/* Input Bar */}
+        {/* Voice Input & Text Input Bar */}
         <form onSubmit={onSendChat} className={styles.mentorInputForm}>
+          <button
+            type="button"
+            className={`${styles.micButton} ${isListening ? styles.micButtonListening : ''}`}
+            onClick={handleToggleMic}
+            title={isListening ? 'Listening… click to stop' : 'Click to speak your question aloud'}
+          >
+            {isListening ? <MicOff size={16} /> : <Mic size={16} />}
+          </button>
+
           <input
             type="text"
             className={styles.mentorInputField}
-            placeholder="Ask anything, no question is too basic…"
+            placeholder={isListening ? 'Listening to your voice now… speak!' : 'Ask or speak anything to Coach Ada…'}
             value={userInput}
             onChange={(e) => onChangeUserInput(e.target.value)}
           />
@@ -131,7 +255,7 @@ export default function MentorAssistantDrawer({
             type="submit"
             className={styles.mentorSendBtn}
             disabled={!userInput.trim() || isAiThinking}
-            aria-label="Send question"
+            aria-label="Send message"
           >
             <Send size={15} />
           </button>

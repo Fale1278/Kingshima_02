@@ -41,23 +41,85 @@ export default function StagePlayground({
   // Detect recent runtime errors
   const recentError = consoleLogs.slice().reverse().find((l) => l.level === 'error');
 
-  const hints = [
-    {
-      level: 1,
-      title: 'Gentle Clue',
-      text: 'Notice how "updateDisplay()" sets the text inside the counter. If you change the starting number in "let count = 0", your counter starts at a different number!',
-    },
-    {
-      level: 2,
-      title: 'Deeper Clue',
-      text: 'To change what the card looks like, switch to "style.css" and look for ".card" or "background". You can change "#38bdf8" to your favorite hex color!',
-    },
-    {
-      level: 3,
-      title: 'Full Solution',
-      text: 'You can test state mutation by clicking the buttons in the preview on the right. Once you see the number change, you are ready to click "Check My Work" below!',
-    },
-  ];
+  const getModuleHints = () => {
+    if (track.id === 'html-structure') {
+      return [
+        {
+          level: 1,
+          title: 'Gentle Clue',
+          text: 'Look at line 11 in "index.html". You will see `<h2 id="student-name">Alex Johnson</h2>`. Try replacing "Alex Johnson" with your own name!',
+        },
+        {
+          level: 2,
+          title: 'Deeper Clue',
+          text: 'Look at line 14: `<button id="action-btn" class="primary-btn">Connect With Me</button>`. You can change "Connect With Me" to "Say Hello" or "Explore Portfolio"!',
+        },
+        {
+          level: 3,
+          title: 'Full Solution',
+          text: 'Click the button in the Live Preview on the right to see it turn green and celebrate. Once you tested it, click "Check My Work" below!',
+        },
+      ];
+    }
+    if (track.id === 'css-styling') {
+      return [
+        {
+          level: 1,
+          title: 'Gentle Clue',
+          text: 'In "style.css", look for `.glass-card { border-radius: 24px; }`. If you change 24px to 12px or 36px, watch the card corners change live!',
+        },
+        {
+          level: 2,
+          title: 'Deeper Clue',
+          text: 'Look for `.glow-btn { background: linear-gradient(...); }`. You can change the hex colors to your favorite shades!',
+        },
+        {
+          level: 3,
+          title: 'Full Solution',
+          text: 'Hover your mouse over the card and button in the Live Preview to test the smooth hover elevation effect, then click "Check My Work"!',
+        },
+      ];
+    }
+    if (track.id === 'web-app') {
+      return [
+        {
+          level: 1,
+          title: 'Gentle Clue',
+          text: 'Type a goal into the input field on the right (like "Launch my portfolio") and click "Add Goal" to see it dynamically added to the list!',
+        },
+        {
+          level: 2,
+          title: 'Deeper Clue',
+          text: 'In "index.html", look for `<h3>Kingshima Mini Web App</h3>`. You can personalize the title to your name\'s Dashboard!',
+        },
+        {
+          level: 3,
+          title: 'Full Solution',
+          text: 'Add two or three goals in the Live Preview, test the "Clear All" button, and then click "Check My Work" to complete your Capstone!',
+        },
+      ];
+    }
+    // Default / js-interactivity
+    return [
+      {
+        level: 1,
+        title: 'Gentle Clue',
+        text: 'Look at line 2 in "script.js": `let count = 0;`. If you change 0 to 5 or 10, your counter starts at that number!',
+      },
+      {
+        level: 2,
+        title: 'Deeper Clue',
+        text: 'Notice how `updateDisplay()` updates the text and adds a subtle bounce scale! Every click triggers this function.',
+      },
+      {
+        level: 3,
+        title: 'Full Solution',
+        text: 'Click the "+" and "-" buttons in the Live Preview on the right. Once you see the number change, you are ready to click "Check My Work"!',
+      },
+    ];
+  };
+
+  const hints = getModuleHints();
 
   return (
     <div className={styles.playgroundContainer}>

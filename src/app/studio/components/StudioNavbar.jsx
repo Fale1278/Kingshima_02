@@ -10,7 +10,8 @@ import {
   Sparkles,
   Save,
   CheckCircle,
-  HelpCircle,
+  Code2,
+  GraduationCap,
 } from 'lucide-react';
 import styles from '../Studio.module.css';
 
@@ -28,6 +29,7 @@ export default function StudioNavbar({
   saveStatus,
   onSave,
   currentXp,
+  student,
 }) {
   const stages = [
     { id: 'discover', step: '1', title: 'Discover' },
@@ -39,24 +41,24 @@ export default function StudioNavbar({
     <header className={styles.topBar}>
       {/* ── Left: Back & Track Orientation ─────────────────────────────── */}
       <div className={styles.navLeft}>
-        <Link href="/bootcamp" className={styles.backLink} title="Back to Bootcamp">
+        <Link href="/bootcamp/dashboard" className={styles.backLink} title="Back to Bootcamp Dashboard">
           <ArrowLeft size={16} />
-          <span>Bootcamp</span>
+          <span>Dashboard</span>
         </Link>
 
         <div className={styles.divider} />
 
         <div className={styles.trackPickerWrapper}>
-          <span className={styles.trackPickerLabel}>Learning:</span>
+          <span className={styles.trackPickerLabel}>Web Dev:</span>
           <select
             className={styles.trackSelectDropdown}
             value={selectedTrackIndex}
             onChange={(e) => onSelectTrack(Number(e.target.value))}
-            aria-label="Select Learning Track"
+            aria-label="Select Web Development Module"
           >
             {tracks.map((t, idx) => (
               <option key={t.id} value={idx}>
-                {t.name}
+                {t.moduleNumber}: {t.name}
               </option>
             ))}
           </select>
@@ -92,38 +94,36 @@ export default function StudioNavbar({
 
       {/* ── Right: Supportive Actions (Clean & Quiet) ─────────────────── */}
       <div className={styles.navRight}>
+        {/* Student XP Badge */}
+        {student && (
+          <div className={styles.studentBadgePill} title={`Logged in as ${student.username}`}>
+            <span>⭐ {currentXp} XP</span>
+            <span className={styles.studentDot}>•</span>
+            <span className={styles.studentNameText}>{student.username}</span>
+          </div>
+        )}
+
         {/* Voice Toggle */}
         <button
           type="button"
           className={`${styles.iconPillBtn} ${isVoiceActive ? styles.iconPillBtnActive : ''}`}
           onClick={onToggleVoice}
-          title={isVoiceActive ? 'Voice Explanations: Active (Click to mute)' : 'Voice Explanations: Off (Click to activate)'}
+          title={isVoiceActive ? 'Coach Ada Voice: Active (Click to mute)' : 'Coach Ada Voice: Off (Click to turn on)'}
         >
           {isVoiceActive ? <Volume2 size={15} /> : <VolumeX size={15} />}
           <span>{isVoiceActive ? 'Voice On' : 'Voice Off'}</span>
         </button>
 
-        {/* Auto / Manual Save Indicator */}
-        <button
-          type="button"
-          className={styles.saveStatusBtn}
-          onClick={onSave}
-          disabled={isSaving}
-          title="Save your current progress to the cloud"
-        >
-          <Save size={14} />
-          <span>{isSaving ? 'Saving…' : saveStatus || 'Saved'}</span>
-        </button>
-
-        {/* Ask AI Mentor CTA */}
+        {/* Ask AI Teacher CTA */}
         <button
           type="button"
           className={styles.mentorToggleBtn}
           onClick={onOpenMentor}
-          title="Open AI Mentor for friendly help"
+          title="Open Coach Ada for real-time classroom conversation"
         >
-          <Sparkles size={15} className={styles.sparkleIcon} />
-          <span>Ask Mentor</span>
+          <GraduationCap size={16} />
+          <span>Coach Ada</span>
+          <span className={styles.liveTinyDot} />
         </button>
       </div>
     </header>
